@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="WhatToDo.MainPage"
+    x:Class="WhatToDo.IntroPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WhatToDo"
@@ -7,10 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Height="600" Width="800">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="#666666" >
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>#PARTIU</TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

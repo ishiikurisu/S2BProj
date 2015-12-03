@@ -10,6 +10,8 @@
     <Grid Background="#666666" >
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock>#PARTIU</TextBlock>
+            <Button x:Name="ButtonRegistrar" Content="Registrar"></Button>
+            <Button Content="Entrar"></Button>
         </StackPanel>
     </Grid>
 </Page>

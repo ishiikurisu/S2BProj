@@ -8,5 +8,7 @@ namespace WhatToDo.Model.Entity
 {
     class Usuario
     {
+        public int IdUsuario { get; set; }
+
     }
 }

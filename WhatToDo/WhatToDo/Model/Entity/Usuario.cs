@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
-    class Usuario
+    public class Usuario
     {
+        public Usuario(int idUsuario, string nome, string senha, string email)
+        {
+            this.IdUsuario = idUsuario;
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Email = email;
+        }
         public int IdUsuario { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }

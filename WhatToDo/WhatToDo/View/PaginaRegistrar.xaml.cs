@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
+using WhatToDo.Model.Entity;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,27 +24,29 @@ namespace WhatToDo.View
     /// </summary>
     public sealed partial class PaginaRegistrar : Page
     {
+        public BancoDeDados Banco { get; set; }
         public PaginaRegistrar()
         {
+            Banco = new BancoDeDados(new List<Usuario>());
             this.InitializeComponent();
         }
 
-        private void ButtonFinalizar_Click(object sender, RoutedEventArgs e)
+        private async void ButtonFinalizar_Click(object sender, RoutedEventArgs e)
         {
             /* turn "Collapsed" to "Visible" */
             string nome = TextNome.Text;
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
 
-            //var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
-            //await msg.ShowAsync();
-            if ()
+            
+            if (Banco.Add(new Usuario(1, nome, senha, email)))
             {
-
+                var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
+                await msg.ShowAsync();
             }
             else
             {
-                LabelErro.
+                LabelErro.Visibility = Visibility.Visible;
             }
         }
     }

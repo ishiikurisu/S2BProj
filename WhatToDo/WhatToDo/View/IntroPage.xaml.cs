@@ -34,10 +34,9 @@ namespace WhatToDo
             Frame.Navigate(typeof(PaginaRegistrar));
         }
 
-        private async void ButtonEntrar_Click(object sender, RoutedEventArgs e)
+        private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialog msg = new MessageDialog("Entre!");
-            await msg.ShowAsync();
+            Frame.Navigate(typeof(PaginaEntrar));
         }
     }
 }

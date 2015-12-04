@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
-    class BancoDeDados
+    public class BancoDeDados
     {
         public List<Usuario> Usuarios { get; set; }
         public BancoDeDados(List<Usuario> usuarios)

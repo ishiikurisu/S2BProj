@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
+    //Bla
     public class Usuario
     {
         public Usuario(int idUsuario, string nome, string senha, string email)

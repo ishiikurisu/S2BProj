@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using WhatToDo.View;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -17,26 +16,25 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace WhatToDo
+namespace WhatToDo.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class IntroPage: Page
+    public sealed partial class PaginaEntrar : Page
     {
-        public IntroPage()
+        public PaginaEntrar()
         {
             this.InitializeComponent();
         }
 
-        private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)
+        private async void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PaginaRegistrar));
-        }
+            string email = TextEmail.Text;
+            string senha = PasswordSenha.Password;
 
-        private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PaginaEntrar));
+            var msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
+            await msg.ShowAsync();
         }
     }
 }

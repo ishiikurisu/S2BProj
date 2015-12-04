@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="WhatToDo.View.PaginaEntrar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WhatToDo.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Height="600" Width="800">
+
+    <Grid Background="#666666">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="50" HorizontalAlignment="Center">Entrar</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10" FontSize="40">E-mail</TextBlock>
+                <TextBox x:Name="TextEmail"  FontSize="40" Width="300" Margin="10"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10" FontSize="40">Senha</TextBlock>
+                <PasswordBox x:Name="PasswordSenha" FontSize="40" Width="300" Margin="10"></PasswordBox>
+            </StackPanel>
+            <Button x:Name="ButtonEntrar" Content="Entrar" FontSize="50" Margin="20" HorizontalAlignment="Center" Click="ButtonEntrar_Click"></Button>
+            <TextBlock x:Name="LabelErro" Text="ERRO!" Foreground="Red" Visibility="Collapsed" FontSize="50"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

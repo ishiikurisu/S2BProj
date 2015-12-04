@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
-    //Bla
     public class Usuario
     {
         

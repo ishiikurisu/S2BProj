@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Height="600" Width="800">
 
-    <Grid Background="#666666">
+    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="50" HorizontalAlignment="Center">Entrar</TextBlock>
             <StackPanel Orientation="Horizontal">

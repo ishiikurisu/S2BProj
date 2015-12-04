@@ -5,12 +5,22 @@
     xmlns:local="using:WhatToDo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="600" Width="800">
+    mc:Ignorable="d" Height="600" Width="800" FontSize="40">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="PanelProfile" Grid.Column="0">
+            <Image x:Name="ImageUser" Margin="20" HorizontalAlignment="Center"></Image>
+            <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"></TextBlock>
+            <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="30"></Button>
+            <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="30"></Button>
+        </StackPanel>
+        <Grid x:Name="PanelMap" Grid.Column="1">
+            
+        </Grid>
     </Grid>
 </Page>

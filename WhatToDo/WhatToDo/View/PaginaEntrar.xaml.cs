@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WhatToDo.Model.Entity;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -35,6 +36,10 @@ namespace WhatToDo.View
 
             var msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
             await msg.ShowAsync();
+
+            /* validar usuário */
+
+            Frame.Navigate(typeof(MainPage), new Usuario(email));
         }
     }
 }

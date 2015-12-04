@@ -23,6 +23,12 @@ namespace WhatToDo.Model.Entity
             this.Email = email;
             this.Perfil = perfil;
         }
+
+        public Usuario(string email)
+        {
+            this.Email = email;
+        }
+
         //Temporary implementation - Validate if Usuario already exists
         public override bool Equals(object obj)
         {

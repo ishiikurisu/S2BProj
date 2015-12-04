@@ -39,7 +39,7 @@ namespace WhatToDo.View
             string senha = PasswordSenha.Password;
 
             
-            if (Banco.Add(new Usuario(1, nome, senha, email)))
+            if (Banco.Add(new Usuario(nome, senha, email, nome)))
             {
                 var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
                 await msg.ShowAsync();

@@ -15,12 +15,12 @@ namespace WhatToDo.Model.Entity
         public string Senha { get; set; }
         public string Nome { get; set; }
         public string Perfil { get; set; }
-        public Usuario(int idUsuario, string nome, string senha, string email)
+        public Usuario(string nome, string senha, string email, string perfil)
         {
-            this.IdUsuario = idUsuario;
             this.Nome = nome;
             this.Senha = senha;
             this.Email = email;
+            this.Perfil = perfil;
         }
         //Temporary implementation - Validate if Usuario already exists
         public override bool Equals(object obj)

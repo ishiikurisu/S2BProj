@@ -27,6 +27,7 @@ namespace WhatToDo
         public IntroPage()
         {
             this.InitializeComponent();
+
         }
 
         private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)

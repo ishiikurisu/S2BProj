@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
+    //Tsetando
     public class Atividade
     {
         //This property has autoincrementation

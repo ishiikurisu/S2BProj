@@ -96,6 +96,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entity\Atividade.cs" />
+    <Compile Include="Model\Entity\Categoria.cs" />
+    <Compile Include="Model\Entity\Interesse.cs" />
+    <Compile Include="Model\Entity\UsuarioAtividade.cs" />
     <Compile Include="View\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>

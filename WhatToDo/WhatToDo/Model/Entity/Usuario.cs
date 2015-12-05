@@ -23,6 +23,13 @@ namespace WhatToDo.Model.Entity
             this.Perfil = perfil;
         }
 
+        public Usuario(string nome, string senha, string email)
+        {
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Email = email;
+        }
+
         public Usuario(string email)
         {
             this.Email = email;

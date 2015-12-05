@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,38 @@ namespace WhatToDo.Service.Constants
 {
     public class DataBaseConstants
     {
-        public static string MyConnectionString = @"server=31.170.164.31;
+        //Connection String
+        public static string MyConnectionString = @"server=31.170.166.58;
                                                   database=u562774431_s2b;
                                                   uid= u562774431_s2b;
-                                                  password=i3Q45JuUAe;";
+                                                  password=i3Q45JuUAe;
+                                                  SslMode=None";
 
-        //mysql -u u562774431_s2b -p i3Q45JuUAe -h 31.170.164.31 u562774431_s2b 
-        public static void InsertTest()
-        {
-            Usuario test = new Usuario("Ygor", "11235813", "ygordanniel@gmail.com", "Longos dias e belas noites.");
-        }
-
+        //Insert Command Model
         public static void ConnectionTest()
         {
+            Usuario test = new Usuario("Ygor", "11235813", "ygordanniel@gmail.com", "Longos dias e belas noites.");
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(MyConnectionString))
+                {
+                    connection.Open();
+                    string InserUsuarioCommand = "INSERT INTO TB_Usuario (email) VALUES (@email)";
+                    using (var command = new MySqlCommand(InserUsuarioCommand, connection))
+                    {
+                        command.Parameters.AddWithValue("@email", test.Email);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch(MySqlException mse)
+            {
 
+            }
+            catch(NotImplementedException nie)
+            {
+
+            }
         }
     }
 }

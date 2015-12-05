@@ -16,32 +16,5 @@ namespace WhatToDo.Service.Constants
                                                   uid= u562774431_s2b;
                                                   password=i3Q45JuUAe;
                                                   SslMode=None";
-
-        //Insert Command Model
-        public static void ConnectionTest()
-        {
-            Usuario test = new Usuario("Ygor", "11235813", "ygordanniel@gmail.com", "Longos dias e belas noites.");
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(MyConnectionString))
-                {
-                    connection.Open();
-                    string InserUsuarioCommand = "INSERT INTO TB_Usuario (email) VALUES (@email)";
-                    using (var command = new MySqlCommand(InserUsuarioCommand, connection))
-                    {
-                        command.Parameters.AddWithValue("@email", test.Email);
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch(MySqlException mse)
-            {
-
-            }
-            catch(NotImplementedException nie)
-            {
-
-            }
-        }
     }
 }

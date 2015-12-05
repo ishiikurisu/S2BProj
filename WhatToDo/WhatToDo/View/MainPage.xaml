@@ -18,7 +18,7 @@
             <Image x:Name="ImageUser" Margin="10" HorizontalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png"/>
             <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"/>
             <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="30" Click="ButtonCreate_Click"/>
-            <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="30"/>
+            <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="30" Click="ButtonSearch_Click"/>
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">
             <Maps:Map x:Name="MapEvents" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Height="600"/>

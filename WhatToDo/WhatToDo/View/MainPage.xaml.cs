@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Shapes;
 using Bing.Maps;
 using WhatToDo.Model.Entity;
+using WhatToDo.View;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -42,7 +43,12 @@ namespace WhatToDo
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            
+            Frame.Navigate(typeof(PaginaEntrar));
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PaginaRegistrar));
         }
     }
 }

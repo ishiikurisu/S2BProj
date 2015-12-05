@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using WhatToDo.Model.Entity;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,24 +20,11 @@ namespace WhatToDo.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PaginaEntrar : Page
+    public sealed partial class PageSearch : Page
     {
-        public PaginaEntrar()
+        public PageSearch()
         {
             this.InitializeComponent();
-        }
-
-        private async void ButtonEntrar_Click(object sender, RoutedEventArgs e)
-        {
-            string email = TextEmail.Text;
-            string senha = PasswordSenha.Password;
-
-            var msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
-            await msg.ShowAsync();
-
-            /* validar usuário */
-
-            Frame.Navigate(typeof(MainPage), new Usuario(email));
         }
     }
 }

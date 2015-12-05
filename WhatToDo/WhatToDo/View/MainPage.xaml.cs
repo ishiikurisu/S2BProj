@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Shapes;
-//using Bing.Maps;
+using Bing.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,12 +26,12 @@ namespace WhatToDo
     /// </summary>
     public sealed partial class MainPage : Page
     {
-//private Map map;
+        private Map map;
         public MainPage()
         {
             this.InitializeComponent();
-//map = new Map();
-//PanelMap.Children.Add(map);
+            map = new Map();
+            PanelMap.Children.Add(map);
         }
     }
 }

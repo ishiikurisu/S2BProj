@@ -39,5 +39,10 @@ namespace WhatToDo
             User = e.Parameter as Usuario;
             LabelUser.Text = User.Email;
         }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

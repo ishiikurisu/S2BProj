@@ -15,9 +15,9 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="PanelProfile" Grid.Column="0">
-            <Image x:Name="ImageUser" Margin="20" HorizontalAlignment="Center" Source="Assets\user.png"/>
+            <Image x:Name="ImageUser" Margin="10" HorizontalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png"/>
             <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"/>
-            <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="30"/>
+            <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="30" Click="ButtonCreate_Click"/>
             <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="30"/>
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">

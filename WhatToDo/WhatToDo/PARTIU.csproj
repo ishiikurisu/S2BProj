@@ -97,12 +97,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\PageRegistrarController.cs" />
+    <Compile Include="Controller\PaginaEntrarController.cs" />
     <Compile Include="Model\Entity\Atividade.cs" />
     <Compile Include="Model\Entity\Categoria.cs" />
     <Compile Include="Model\Entity\Interesse.cs" />
     <Compile Include="Model\Entity\UsuarioAtividade.cs" />
     <Compile Include="Service\Connection\DatabaseConnection.cs" />
-    <Compile Include="Service\Constants\DataBaseConstants.cs" />
+    <Compile Include="Service\Constant\DataBaseConstants.cs" />
+    <Compile Include="Service\Interface\IDataBase.cs" />
     <Compile Include="View\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>

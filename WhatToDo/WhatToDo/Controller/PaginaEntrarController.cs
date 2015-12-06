@@ -9,11 +9,11 @@ using WhatToDo.Service.Interface;
 
 namespace WhatToDo.Controller
 {
-    public class PageRegistrarController : IDataBase
+    class PaginaEntrarController : IDataBase
     {
         public int DataBaseCaller(Usuario UsuarioCasdatro)
         {
-            return DatabaseConnection.InsertUsuario(UsuarioCasdatro);
+            return DatabaseConnection.ValidateRegister(UsuarioCasdatro);
         }
     }
 }

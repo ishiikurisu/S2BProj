@@ -41,7 +41,6 @@ namespace WhatToDo.Service.Connection
 					return 1;
 				}
 				reader.Close();
-
 				// Insert new user on user table
 				sql = "INSERT INTO TB_Usuario(nome, senha, email) VALUES (@nome, @senha, @email)";
 				cmd = new MySqlCommand(sql, connection);
@@ -55,6 +54,28 @@ namespace WhatToDo.Service.Connection
 			}
 
 			return 0;
+        }
+        public static int ValidateRegister((Usuario usuario)
+        {
+            //Validade if an email is registered
+            /*On this part we can use the comands on "Query to look for email on user table" from the function above and there we just call this function as well
+              plus the password validation.
+            */
+            /*
+            sql = "SELECT COUNT(1) FROM TB_Usuario WHERE email = @email";
+				cmd = new MySqlCommand(sql, connection);
+				cmd.Parameters.AddWithValue("@email", usuario.Email);
+				var reader = cmd.ExecuteReader();
+				reader.Read();
+				// Checks if register already exists
+				if (reader.GetInt16(0) == 1)
+				{
+					reader.Close();
+					connection.Close();
+					return 1;
+				}
+            */
+            return 1;
         }
         //Insert Command Model
         public static void ConnectionTest()

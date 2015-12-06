@@ -33,8 +33,9 @@ namespace WhatToDo.View
 
         private async void ButtonFinalizar_Click(object sender, RoutedEventArgs e)
         {
-            Usuario UsuarioCadastro = new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text);
-            if (PageRegistrarController.DataBaseCaller(UsuarioCadastro) == 0)
+            PageRegistrarController PRC = new PageRegistrarController();
+            //Usuario UsuarioCadastro = new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text);
+            if (PRC.DataBaseCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
             {
                 msg = new MessageDialog("Usuário cadastrado com sucesso!");
                 await msg.ShowAsync();

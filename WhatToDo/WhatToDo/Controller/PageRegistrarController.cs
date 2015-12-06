@@ -10,7 +10,7 @@ namespace WhatToDo.Controller
 {
     public class PageRegistrarController
     {
-        public static bool DataBaseCaller(Usuario UsuarioCasdatro)
+        public static int DataBaseCaller(Usuario UsuarioCasdatro)
         {
             return DatabaseConnection.InsertUsuario(UsuarioCasdatro);
         }

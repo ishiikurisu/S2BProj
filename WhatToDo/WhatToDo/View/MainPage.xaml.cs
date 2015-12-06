@@ -16,6 +16,7 @@ using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Shapes;
 using Bing.Maps;
+using WhatToDo.Service.Connection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,9 +30,15 @@ namespace WhatToDo
         private Map map;
         public MainPage()
         {
+			
             this.InitializeComponent();
             map = new Map();
             PanelMap.Children.Add(map);
         }
-    }
+
+		private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+	}
 }

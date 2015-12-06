@@ -28,7 +28,6 @@ namespace WhatToDo
         public IntroPage()
         {
             this.InitializeComponent();
-            DataBaseConstants.ConnectionTest();
         }
 
         private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)

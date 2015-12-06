@@ -55,7 +55,7 @@ namespace WhatToDo.Service.Connection
 
 			return 0;
         }
-        public static int ValidateRegister((Usuario usuario)
+        public static int ValidateRegister(Usuario usuario)
         {
             //Validade if an email is registered
             /*On this part we can use the comands on "Query to look for email on user table" from the function above and there we just call this function as well

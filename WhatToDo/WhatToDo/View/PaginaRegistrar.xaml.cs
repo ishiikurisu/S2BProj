@@ -39,6 +39,7 @@ namespace WhatToDo.View
             {
                 msg = new MessageDialog("Usuário cadastrado com sucesso!");
                 await msg.ShowAsync();
+                LabelErro.Visibility = Visibility.Collapsed;
             }
             else
             {

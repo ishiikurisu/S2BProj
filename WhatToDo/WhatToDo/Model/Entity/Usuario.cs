@@ -29,7 +29,7 @@ namespace WhatToDo.Model.Entity
             this.Senha = senha;
             this.Email = email;
         }
-        public Usuario(string senha, string email)
+        public Usuario(string email, string senha)
         {
             this.Senha = senha;
             this.Email = email;

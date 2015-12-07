@@ -18,11 +18,9 @@ namespace WhatToDo.Service.Connection
 		// TODO: More error codes
 		public static int InsertUsuario(Usuario usuario)
         {
-			//Verify if UsuarioCadastro already exists on database, if it does exist return false else insert UsuarioCadastro into database and return true.
 			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
 			{
 				connection.Open();
-				//cmd.Parameters.Add
 
 				string sql;
 				MySqlCommand cmd;
@@ -55,27 +53,59 @@ namespace WhatToDo.Service.Connection
 
 			return 0;
         }
-        public static int ValidateRegister(Usuario usuario)
+
+		// Validate a user on the database, checking if email and password is correct
+		// Returns:
+		// 0: Email and Password check
+		// 1: Email not found
+		// 2: Wrong password
+		// TODO: More error codes
+		// TODO: Improve security
+		public static int ValidateRegister(Usuario usuario)
         {
-            //Validade if an email is registered
-            /*On this part we can use the comands on "Query to look for email on user table" from the function above and there we just call this function as well
-              plus the password validation.
-            */
-            /*
-            sql = "SELECT COUNT(1) FROM TB_Usuario WHERE email = @email";
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				string sql;
+				MySqlCommand cmd;
+
+				// Query to look for email on user table
+				sql = "SELECT senha FROM TB_Usuario WHERE email = @email";
 				cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@email", usuario.Email);
+
 				var reader = cmd.ExecuteReader();
-				reader.Read();
-				// Checks if register already exists
-				if (reader.GetInt16(0) == 1)
+
+				string password;
+				// Checks if email and password is correct
+				if (reader.Read() && ((password = reader.GetString(0)) != null))
+				{
+					if(password == usuario.Senha)
+					{
+						reader.Close();
+						connection.Close();
+
+						return 0;
+					}
+					else
+					{
+						reader.Close();
+						connection.Close();
+
+						return 2;
+					}
+						
+				}
+				else
 				{
 					reader.Close();
 					connection.Close();
+
 					return 1;
 				}
-            */
-            return 1;
+
+			}
         }
         //Insert Command Model
         public static void ConnectionTest()

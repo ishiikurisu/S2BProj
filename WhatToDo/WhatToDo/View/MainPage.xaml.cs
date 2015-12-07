@@ -29,10 +29,11 @@ namespace WhatToDo
     public sealed partial class MainPage : Page
     {
         public Usuario User{ get; set; }
+        private bool MenuOpened { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
-
+            MenuOpened = false;
             /* carregar usuário */
         }
 
@@ -50,6 +51,28 @@ namespace WhatToDo
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(PaginaRegistrar));
+        }
+
+        private void ImageExpand_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (MenuOpened)
+            {
+                LabelUser.Visibility = Visibility.Collapsed;
+                ButtonCreate.Visibility = Visibility.Collapsed;
+                ButtonSearch.Visibility = Visibility.Collapsed;
+                ImageExpand.Text = ">";
+                ColumnMenu.Width = new GridLength(40);
+            }
+            else
+            {
+                LabelUser.Visibility = Visibility.Visible;
+                ButtonCreate.Visibility = Visibility.Visible;
+                ButtonSearch.Visibility = Visibility.Visible;
+                ImageExpand.Text = "<<<";
+                ColumnMenu.Width = new GridLength(200);
+            }
+
+            MenuOpened = !MenuOpened;
         }
     }
 }

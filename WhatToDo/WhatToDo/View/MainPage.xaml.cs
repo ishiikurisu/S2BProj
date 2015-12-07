@@ -45,12 +45,12 @@ namespace WhatToDo
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PaginaEntrar));
+            Frame.Navigate(typeof(PageCreate));
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PaginaRegistrar));
+            Frame.Navigate(typeof(PageSearch), User);
         }
 
         private void ImageExpand_PointerPressed(object sender, PointerRoutedEventArgs e)

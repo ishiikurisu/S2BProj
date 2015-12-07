@@ -6,24 +6,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Maps="using:Bing.Maps"
     x:Class="WhatToDo.View.PageCreate"
-    mc:Ignorable="d" Height="600" Width="800">
+    mc:Ignorable="d" FontSize="20">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition x:Name="ColumnMenu" Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="PanelOptions" Orientation="Vertical">
-            <TextBlock x:Name="LabelNome" Margin="10" Text="Nome" FontSize="30"/>
-            <TextBox x:Name="TextNome" Margin="20,0"  FontSize="40"></TextBox>
-            <TextBlock x:Name="LabelLocal" Margin="10" Text="Local" FontSize="30"/>
-            <TextBox x:Name="TextLocal" Margin="20,0"  FontSize="40"></TextBox>
-            <Button x:Name="ButtonCreate" Margin="20, 100" FontSize="40" Content="Criar" HorizontalAlignment="Center"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonReturn" Margin="10" Content="Voltar" HorizontalAlignment="Center"></Button>
+                <Button x:Name="ButtonCollapse" Margin="10" Content="Colapsar" HorizontalAlignment="Center"></Button>
+            </StackPanel>
+            <TextBlock x:Name="LabelNome" Margin="10,5" Text="Nome" />
+            <TextBox x:Name="TextNome" Margin="20,0"></TextBox>
+            <TextBlock x:Name="LabelLocal" Margin="10,5" Text="Local" />
+            <TextBox x:Name="TextLocal" Margin="20,0" ></TextBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center"></Button>
+                
+            </StackPanel>
+            
         </StackPanel>
         <Grid Grid.Column="1">
 
-            <Maps:Map HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Maps:Map x:Name="MyMap" PointerPressed="MyMap_PointerPressedOverride" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Grid>
     </Grid>

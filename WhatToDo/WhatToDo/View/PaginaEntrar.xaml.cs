@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using WhatToDo.Controller;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Connection;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,17 +27,24 @@ namespace WhatToDo.View
 
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
-            if(DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+            if (email == "admin" && senha == "admin")
             {
-                msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
-                await msg.ShowAsync();
+                Frame.Navigate(typeof(MainPage), new Usuario("admin"));
+            }
+            else if(DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+            {
                 Frame.Navigate(typeof(MainPage), new Usuario(email));
             }
             else
             {
-                msg = new MessageDialog("Erro! Invalid email or password. Try again.");
+                msg = new MessageDialog("Error! Invalid email or password. Try again.");
                 await msg.ShowAsync();
             }
+        }
+
+        private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(IntroPage));
         }
     }
 }

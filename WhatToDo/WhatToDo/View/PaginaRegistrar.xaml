@@ -22,7 +22,10 @@
                 <TextBlock Margin="10" >Senha</TextBlock>
                 <PasswordBox x:Name="PasswordSenha" Margin="10" Width="300" FontSize="40"></PasswordBox>
             </StackPanel>
-            <Button x:Name="ButtonFinalizar" Content="Finalizar" Margin="25" FontSize="50" HorizontalAlignment="Center" Click="ButtonFinalizar_Click"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonFinalizar" Content="Finalizar" Margin="25" FontSize="50" HorizontalAlignment="Center" Click="ButtonFinalizar_Click"></Button>
+                <Button x:Name="ButtonCancelar" Content="Cancelar" Margin="25" FontSize="50" HorizontalAlignment="Center" Click="ButtonCancelar_Click"></Button>
+            </StackPanel>
             <TextBlock x:Name="LabelErro" Visibility="Collapsed" HorizontalAlignment="Center" Foreground="Red" >ERRO!</TextBlock>
         </StackPanel>
     </Grid>

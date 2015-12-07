@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WhatToDo.Model.Entity;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,10 +23,13 @@ namespace WhatToDo.View
     /// </summary>
     public sealed partial class PageCreate : Page
     {
+        private Usuario User { get; set; }
+        private bool MenuOpened { get; set; }
         public PageCreate()
         {
             this.InitializeComponent();
             this.MyMap.PointerPressedOverride += MyMap_PointerPressedOverride;
+            MenuOpened = true;
         }
 
         void MyMap_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
@@ -37,5 +41,42 @@ namespace WhatToDo.View
             this.MyMap.Children.Add(pushpin);
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            User = e.Parameter as Usuario;
+        }
+
+        private void ButtonReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage), User);
+        }
+
+        private void ButtonCollapse_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuOpened)
+            {
+                ButtonReturn.Visibility = Visibility.Collapsed;
+                ButtonCreate.Visibility = Visibility.Collapsed;
+                LabelNome.Visibility = Visibility.Collapsed;
+                TextNome.Visibility = Visibility.Collapsed;
+                LabelLocal.Visibility = Visibility.Collapsed;
+                TextLocal.Visibility = Visibility.Collapsed;
+                ButtonCollapse.Content = ">";
+                ColumnMenu.Width = new GridLength(40);
+            }
+            else
+            {
+                ButtonReturn.Visibility = Visibility.Visible;
+                ButtonCreate.Visibility = Visibility.Visible;
+                LabelNome.Visibility = Visibility.Visible;
+                TextNome.Visibility = Visibility.Visible;
+                LabelLocal.Visibility = Visibility.Visible;
+                TextLocal.Visibility = Visibility.Visible;
+                ButtonCollapse.Content = "<<<";
+                ColumnMenu.Width = new GridLength(300);
+            }
+
+            MenuOpened = !MenuOpened;
+        }
     }
 }

@@ -28,7 +28,7 @@
 
         <Grid Grid.Column="1">
 
-            <Maps:Map HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Maps:Map HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="800"/>
 
         </Grid>
     </Grid>

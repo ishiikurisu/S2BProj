@@ -45,7 +45,7 @@ namespace WhatToDo
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PageCreate));
+            Frame.Navigate(typeof(PageCreate), User);
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)

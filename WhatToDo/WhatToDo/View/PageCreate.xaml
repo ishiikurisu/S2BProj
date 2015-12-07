@@ -16,8 +16,8 @@
 
         <StackPanel x:Name="PanelOptions" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonReturn" Margin="10" Content="Voltar" HorizontalAlignment="Center"></Button>
-                <Button x:Name="ButtonCollapse" Margin="10" Content="Colapsar" HorizontalAlignment="Center"></Button>
+                <Button x:Name="ButtonReturn" Margin="10" Content="Voltar" HorizontalAlignment="Center" Click="ButtonReturn_Click"></Button>
+                <Button x:Name="ButtonCollapse" Margin="10" Content="&lt;&lt;&lt;" Background="Transparent" HorizontalAlignment="Center" Click="ButtonCollapse_Click"></Button>
             </StackPanel>
             <TextBlock x:Name="LabelNome" Margin="10,5" Text="Nome" />
             <TextBox x:Name="TextNome" Margin="20,0"></TextBox>
@@ -31,7 +31,7 @@
         </StackPanel>
         <Grid Grid.Column="1">
 
-            <Maps:Map x:Name="MyMap" PointerPressed="MyMap_PointerPressedOverride" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Maps:Map x:Name="MyMap" PointerPressed="MyMap_PointerPressedOverride" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="800"/>
 
         </Grid>
     </Grid>

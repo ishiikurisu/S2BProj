@@ -45,7 +45,7 @@ namespace WhatToDo.View
             //{
             //    LabelErro.Visibility = Visibility.Visible;
             //}
-            Frame.Navigate(typeof(MainPage), new Usuario(TextEmail.Text);
+            Frame.Navigate(typeof(MainPage), new Usuario(TextEmail.Text));
         }
 
         private void ButtonCancelar_Click(object sender, RoutedEventArgs e)

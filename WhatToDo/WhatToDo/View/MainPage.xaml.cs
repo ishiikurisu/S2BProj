@@ -32,6 +32,7 @@ namespace WhatToDo
         public MainPage()
         {
             this.InitializeComponent();
+
             /* carregar usuário */
         }
 

@@ -5,26 +5,26 @@
     xmlns:local="using:WhatToDo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="600" Width="800" FontSize="40">
+    mc:Ignorable="d" FontSize="20">
 
     <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}" >
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Margin="30" FontSize="50" HorizontalAlignment="Center">Registrar</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Margin="10">Nome</TextBlock>
-                <TextBox x:Name="TextNome" Width="300" Margin="10" FontSize="40"></TextBox>
+                <TextBox x:Name="TextNome" Margin="10" FontSize="20" Width="200"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Margin="10">E-mail</TextBlock>
-                <TextBox x:Name="TextEmail" Margin="10" Width="300" FontSize="40"></TextBox>
+                <TextBox x:Name="TextEmail" Margin="10" FontSize="20" Width="200"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Margin="10" >Senha</TextBlock>
-                <PasswordBox x:Name="PasswordSenha" Margin="10" Width="300" FontSize="40"></PasswordBox>
+                <PasswordBox x:Name="PasswordSenha" Margin="10" FontSize="20" Width="200"></PasswordBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonFinalizar" Content="Finalizar" Margin="25" FontSize="50" HorizontalAlignment="Center" Click="ButtonFinalizar_Click"></Button>
-                <Button x:Name="ButtonCancelar" Content="Cancelar" Margin="25" FontSize="50" HorizontalAlignment="Center" Click="ButtonCancelar_Click"></Button>
+                <Button x:Name="ButtonFinalizar" Content="Finalizar" Margin="25" FontSize="20" HorizontalAlignment="Center" Click="ButtonFinalizar_Click"></Button>
+                <Button x:Name="ButtonCancelar" Content="Cancelar" Margin="25" FontSize="20" HorizontalAlignment="Center" Click="ButtonCancelar_Click"></Button>
             </StackPanel>
             <TextBlock x:Name="LabelErro" Visibility="Collapsed" HorizontalAlignment="Center" Foreground="Red" >ERRO!</TextBlock>
         </StackPanel>

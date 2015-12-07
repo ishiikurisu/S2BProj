@@ -5,24 +5,24 @@
     xmlns:local="using:WhatToDo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="600" Width="800">
+    mc:Ignorable="d" FontSize="20">
 
     <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock FontSize="50" HorizontalAlignment="Center">Entrar</TextBlock>
+            <TextBlock FontSize="30" HorizontalAlignment="Center">Entrar</TextBlock>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="10" FontSize="40">E-mail</TextBlock>
-                <TextBox x:Name="TextEmail"  FontSize="40" Width="300" Margin="10"></TextBox>
+                <TextBlock Margin="10" >E-mail</TextBlock>
+                <TextBox x:Name="TextEmail"  FontSize="20" Width="200" Margin="10"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="10" FontSize="40">Senha</TextBlock>
-                <PasswordBox x:Name="PasswordSenha" FontSize="40" Width="300" Margin="10"></PasswordBox>
+                <TextBlock Margin="10" FontSize="20">Senha</TextBlock>
+                <PasswordBox x:Name="PasswordSenha" FontSize="20" Width="200" Margin="10"></PasswordBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonEntrar" Content="Entrar" FontSize="50" Margin="20" HorizontalAlignment="Center" Click="ButtonEntrar_Click"></Button>
-                <Button x:Name="ButtonCancelar" Content="Cancelar" FontSize="50" Margin="20" HorizontalAlignment="Center" Click="ButtonCancelar_Click"></Button>
+                <Button x:Name="ButtonEntrar" Content="Entrar" FontSize="20" Margin="20" HorizontalAlignment="Center" Click="ButtonEntrar_Click"></Button>
+                <Button x:Name="ButtonCancelar" Content="Cancelar" FontSize="20" Margin="20" HorizontalAlignment="Center" Click="ButtonCancelar_Click"></Button>
             </StackPanel>
-            <TextBlock x:Name="LabelErro" Text="E-mail e/ou senha erradas" Foreground="Red" Visibility="Collapsed" FontSize="50"></TextBlock>
+            <TextBlock x:Name="LabelErro" Text="E-mail e/ou senha erradas" Foreground="Red" Visibility="Collapsed" FontSize="20"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

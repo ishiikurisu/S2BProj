@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
 using WhatToDo.Model.Entity;
+using WhatToDo.Controller;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,30 +25,37 @@ namespace WhatToDo.View
     /// </summary>
     public sealed partial class PaginaRegistrar : Page
     {
-        public BancoDeDados Banco { get; set; }
+        private MessageDialog msg;
         public PaginaRegistrar()
         {
-            Banco = new BancoDeDados(new List<Usuario>());
             this.InitializeComponent();
         }
 
         private async void ButtonFinalizar_Click(object sender, RoutedEventArgs e)
         {
-            /* turn "Collapsed" to "Visible" */
-            string nome = TextNome.Text;
-            string email = TextEmail.Text;
-            string senha = PasswordSenha.Password;
-
-            
-            if (Banco.Add(new Usuario(nome, senha, email, nome)))
+            PageRegistrarController PRC = new PageRegistrarController();
+            //Usuario UsuarioCadastro = new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text);
+            if (PRC.DataBaseCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
             {
-                var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
+                msg = new MessageDialog("Usuário cadastrado com sucesso!");
                 await msg.ShowAsync();
+                LabelErro.Visibility = Visibility.Collapsed;
             }
             else
             {
                 LabelErro.Visibility = Visibility.Visible;
             }
+            /* turn "Collapsed" to "Visible" */
+            //Old test for LabelErro.Visibility implementation.
+            //if (Banco.Add(new Usuario(nome, senha, email)))
+            //{
+            //    var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
+            //    await msg.ShowAsync();
+            //}
+            //else
+            //{
+            //    LabelErro.Visibility = Visibility.Visible;
+            //}
         }
     }
 }

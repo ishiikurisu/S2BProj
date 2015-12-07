@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WhatToDo.Service.Constants;
 using WhatToDo.View;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -27,7 +28,6 @@ namespace WhatToDo
         public IntroPage()
         {
             this.InitializeComponent();
-
         }
 
         private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)

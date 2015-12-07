@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WhatToDo.Controller;
 using WhatToDo.Model.Entity;
+using WhatToDo.Service.Connection;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -24,6 +26,7 @@ namespace WhatToDo.View
     /// </summary>
     public sealed partial class PaginaEntrar : Page
     {
+        public MessageDialog msg { get; set; }
         public PaginaEntrar()
         {
             this.InitializeComponent();
@@ -31,15 +34,21 @@ namespace WhatToDo.View
 
         private async void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
+            PaginaEntrarController PEC = new PaginaEntrarController();
+
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
-
-            var msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
-            await msg.ShowAsync();
-
-            /* validar usuário */
-
-            Frame.Navigate(typeof(MainPage), new Usuario(email));
+            if(DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+            {
+                msg = new MessageDialog(string.Format("the email {0} has {1} as a password", email, senha));
+                await msg.ShowAsync();
+                Frame.Navigate(typeof(MainPage), new Usuario(email));
+            }
+            else
+            {
+                msg = new MessageDialog("Erro! Invalid email or password. Try again.");
+                await msg.ShowAsync();
+            }
         }
     }
 }

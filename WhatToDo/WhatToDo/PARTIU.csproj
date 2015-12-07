@@ -96,11 +96,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller\PageRegistrarController.cs" />
+    <Compile Include="Controller\PaginaEntrarController.cs" />
     <Compile Include="Model\Entity\Atividade.cs" />
     <Compile Include="Model\Entity\Categoria.cs" />
     <Compile Include="Model\Entity\Interesse.cs" />
     <Compile Include="Model\Entity\UsuarioAtividade.cs" />
-    <Compile Include="Service\Constants\DataBaseConstants.cs" />
+    <Compile Include="Service\Connection\DatabaseConnection.cs" />
+    <Compile Include="Service\Constant\DataBaseConstants.cs" />
+    <Compile Include="Service\Interface\IDataBase.cs" />
     <Compile Include="View\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
@@ -173,13 +177,16 @@
     <SDKReference Include="Bing.Maps.Xaml, Version=1.313.0825.0">
       <Name>Bing Maps for C#, C++, or Visual Basic</Name>
     </SDKReference>
-    <SDKReference Include="Microsoft.VCLibs, version=12.0">
-      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
-    </SDKReference>
-    <SDKReference Include="SQLite.UAP.2015, Version=3.9.2">
-      <Name>SQLite for Universal App Platform</Name>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data.RT">
+      <HintPath>C:\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\RT\MySql.Data.RT.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

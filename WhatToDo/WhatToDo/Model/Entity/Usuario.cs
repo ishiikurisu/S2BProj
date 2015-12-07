@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace WhatToDo.Model.Entity
 {
-    //Bla
     public class Usuario
     {
         
@@ -24,6 +23,17 @@ namespace WhatToDo.Model.Entity
             this.Perfil = perfil;
         }
 
+        public Usuario(string nome, string senha, string email)
+        {
+            this.Nome = nome;
+            this.Senha = senha;
+            this.Email = email;
+        }
+        public Usuario(string email, string senha)
+        {
+            this.Senha = senha;
+            this.Email = email;
+        }
         public Usuario(string email)
         {
             this.Email = email;

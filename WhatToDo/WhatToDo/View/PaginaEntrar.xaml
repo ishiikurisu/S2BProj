@@ -16,7 +16,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="10" FontSize="20">Senha</TextBlock>
-                <PasswordBox x:Name="PasswordSenha" FontSize="20" Width="200" Margin="10"></PasswordBox>
+                <PasswordBox x:Name="PasswordSenha" FontSize="20" Width="200" Margin="10" KeyDown="PasswordSenha_KeyDown" ></PasswordBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonEntrar" Content="Entrar" FontSize="20" Margin="20" HorizontalAlignment="Center" Click="ButtonEntrar_Click"></Button>

@@ -46,5 +46,27 @@ namespace WhatToDo.View
         {
             Frame.Navigate(typeof(IntroPage));
         }
+
+        private async void PasswordSenha_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                string email = TextEmail.Text;
+                string senha = PasswordSenha.Password;
+                if (email == "admin" && senha == "admin")
+                {
+                    Frame.Navigate(typeof(MainPage), new Usuario("admin"));
+                }
+                else if (DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+                {
+                    Frame.Navigate(typeof(MainPage), new Usuario(email));
+                }
+                else
+                {
+                    msg = new MessageDialog("Error! Invalid email or password. Try again.");
+                    await msg.ShowAsync();
+                }
+            }
+        }
     }
 }

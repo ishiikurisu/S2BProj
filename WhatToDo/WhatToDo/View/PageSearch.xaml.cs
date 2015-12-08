@@ -40,7 +40,7 @@ namespace WhatToDo.View
                 TextQuery.Visibility = Visibility.Collapsed;
                 TextResults.Visibility = Visibility.Collapsed;
                 ButtonCollapse.Content = ">";
-                ColumnMenu.Width = new GridLength(40);
+                ColumnMenu.Width = new GridLength(60);
             }
             else
             {

@@ -66,7 +66,7 @@ namespace WhatToDo.View
                 LabelLocal.Visibility = Visibility.Collapsed;
                 TextLocal.Visibility = Visibility.Collapsed;
                 ButtonCollapse.Content = ">";
-                ColumnMenu.Width = new GridLength(40);
+                ColumnMenu.Width = new GridLength(60);
             }
             else
             {

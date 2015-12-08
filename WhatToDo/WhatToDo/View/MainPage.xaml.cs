@@ -62,7 +62,7 @@ namespace WhatToDo
                 ButtonCreate.Visibility = Visibility.Collapsed;
                 ButtonSearch.Visibility = Visibility.Collapsed;
                 ImageExpand.Text = ">";
-                ColumnMenu.Width = new GridLength(40);
+                ColumnMenu.Width = new GridLength(60);
             }
             else
             {

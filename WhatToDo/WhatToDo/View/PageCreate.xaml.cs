@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,23 +27,16 @@ namespace WhatToDo.View
     {
         private Usuario User { get; set; }
         private bool MenuOpened { get; set; }
+        private bool MapMoved { get; set; }
+
         public PageCreate()
         {
             this.InitializeComponent();
+            this.PointerReleased += MyMap_PointerReleasedOverride;
             MenuOpened = true;
+            MapMoved = false;
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
-        }
-
-        async void MyMap_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
-        {
-            Bing.Maps.Location l = new Bing.Maps.Location();
-            this.MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
-            Bing.Maps.Pushpin pushpin = new Bing.Maps.Pushpin();
-            pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
-            var msg = new MessageDialog("" + l.Latitude.ToString() + " " + l.Longitude.ToString());
-            await msg.ShowAsync();
-            this.MyMap.Children.Add(pushpin);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -82,6 +76,31 @@ namespace WhatToDo.View
 
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
+        }
+
+        private void MyMap_PointerReleasedOverride(object sender, PointerRoutedEventArgs e)
+        {
+            if (!MapMoved)
+            {
+                AddPin(e);
+            }
+            MapMoved = false;
+        }
+
+        private void MyMap_ViewChanged(object sender, Bing.Maps.ViewChangedEventArgs e)
+        {
+            MapMoved = true;
+        }
+
+        async private void AddPin(PointerRoutedEventArgs e)
+        {
+            Bing.Maps.Location l = new Bing.Maps.Location();
+            this.MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
+            Bing.Maps.Pushpin pushpin = new Bing.Maps.Pushpin();
+            pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+            var msg = new MessageDialog("" + l.Latitude.ToString() + " " + l.Longitude.ToString());
+            await msg.ShowAsync();
+            this.MyMap.Children.Add(pushpin);
         }
     }
 }

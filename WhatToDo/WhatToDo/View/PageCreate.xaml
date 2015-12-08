@@ -31,7 +31,7 @@
         </StackPanel>
         <Grid Grid.Column="1">
 
-            <Maps:Map x:Name="MyMap" PointerPressed="MyMap_PointerPressedOverride" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="800"/>
+            <Maps:Map x:Name="MyMap" PointerPressedOverride="MyMap_PointerPressedOverride" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="800"/>
 
         </Grid>
     </Grid>

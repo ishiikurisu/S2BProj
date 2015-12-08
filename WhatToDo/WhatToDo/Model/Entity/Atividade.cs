@@ -18,7 +18,7 @@ namespace WhatToDo.Model.Entity
         public Atividade(string nome, int idCategoria, string localizacao, string descricao, DateTime data)
         {
             this.Nome = nome;
-            this.IdAtividade = idCategoria;
+            this.IdCategoria = idCategoria;
             this.Localizacao = localizacao;
             this.Descricao = descricao;
             this.Data = data;

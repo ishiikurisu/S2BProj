@@ -44,7 +44,6 @@ namespace WhatToDo.Service.Connection
 
 				cmd.ExecuteNonQuery();
 
-				connection.Close();
 			}
 
 			return 0;
@@ -67,7 +66,7 @@ namespace WhatToDo.Service.Connection
 				MySqlCommand cmd;
 
 				// Query to look for email on user table
-				sql = "SELECT senha FROM TB_Usuario WHERE email = @email";
+				sql = "SELECT senha FROM TB_Usuario WHERE email = @email LIMIT 1";
 				cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@email", usuario.Email);
 
@@ -140,7 +139,7 @@ namespace WhatToDo.Service.Connection
 				MySqlCommand cmd;
 
 				// Query to look for email on user table
-				sql = "SELECT * FROM TB_Usuario WHERE email = @email";
+				sql = "SELECT * FROM TB_Usuario WHERE email = @email LIMIT 1";
 				cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@email", email);
 
@@ -161,6 +160,26 @@ namespace WhatToDo.Service.Connection
 			}
 
 			return null;
+		}
+
+		// Insert an Atividade on the database
+		public static void InsertAtividade(Atividade atividade)
+		{
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				var sql = "INSERT INTO TB_Atividade(nome, id_categoria, local, descricao, data) VALUES (@nome, @id_categoria, @local, @descricao, @data)";
+
+				var cmd = new MySqlCommand(sql, connection);
+				cmd.Parameters.AddWithValue("@nome", atividade.Nome);
+				cmd.Parameters.AddWithValue("@id_categoria", atividade.IdCategoria);
+				cmd.Parameters.AddWithValue("@local", atividade.Localizacao);
+				cmd.Parameters.AddWithValue("@descricao", atividade.Descricao);
+				cmd.Parameters.AddWithValue("@data", atividade.Data);
+
+				cmd.ExecuteNonQuery();
+			}
 		}
     }
 }

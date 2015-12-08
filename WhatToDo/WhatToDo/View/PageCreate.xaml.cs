@@ -92,15 +92,20 @@ namespace WhatToDo.View
             MapMoved = true;
         }
 
-        async private void AddPin(PointerRoutedEventArgs e)
+        private void AddPin(PointerRoutedEventArgs e)
         {
             Bing.Maps.Location l = new Bing.Maps.Location();
             this.MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
             Bing.Maps.Pushpin pushpin = new Bing.Maps.Pushpin();
             pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
-            var msg = new MessageDialog("" + l.Latitude.ToString() + " " + l.Longitude.ToString());
-            await msg.ShowAsync();
+            TextLocal.Text = "" + l.Latitude.ToString() + " " + l.Longitude.ToString();
+            MyMap.Children.Clear();
             this.MyMap.Children.Add(pushpin);
+        }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+            /* adicionar controle para adicionar atividade */
         }
     }
 }

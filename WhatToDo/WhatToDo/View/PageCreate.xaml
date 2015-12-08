@@ -16,7 +16,7 @@
 
         <StackPanel x:Name="PanelOptions" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonReturn" Margin="10" Content="Voltar" HorizontalAlignment="Center" Click="ButtonReturn_Click"></Button>
+                <Button x:Name="ButtonReturn" Margin="10" Content="Cancelar" HorizontalAlignment="Center" Click="ButtonReturn_Click"></Button>
                 <Button x:Name="ButtonCollapse" Margin="10" Content="&lt;&lt;&lt;" Background="Transparent" HorizontalAlignment="Center" Click="ButtonCollapse_Click"></Button>
             </StackPanel>
             <TextBlock x:Name="LabelNome" Margin="10,5" Text="Nome" />
@@ -24,7 +24,7 @@
             <TextBlock x:Name="LabelLocal" Margin="10,5" Text="Local" />
             <TextBox x:Name="TextLocal" Margin="20,0" ></TextBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center"></Button>
+                <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center" Click="ButtonCreate_Click"></Button>
                 
             </StackPanel>
             

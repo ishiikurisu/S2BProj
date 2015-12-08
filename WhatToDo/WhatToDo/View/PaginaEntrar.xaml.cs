@@ -15,31 +15,15 @@ namespace WhatToDo.View
     /// </summary>
     public sealed partial class PaginaEntrar : Page
     {
-        public MessageDialog msg { get; set; }
         public PaginaEntrar()
         {
             this.InitializeComponent();
         }
 
-        private async void ButtonEntrar_Click(object sender, RoutedEventArgs e)
+        private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
             PaginaEntrarController PEC = new PaginaEntrarController();
-
-            string email = TextEmail.Text;
-            string senha = PasswordSenha.Password;
-            if (email == "admin" && senha == "admin")
-            {
-                Frame.Navigate(typeof(MainPage), new Usuario("admin"));
-            }
-            else if(DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
-            {
-                Frame.Navigate(typeof(MainPage), new Usuario(email));
-            }
-            else
-            {
-                msg = new MessageDialog("Error! Invalid email or password. Try again.");
-                await msg.ShowAsync();
-            }
+            Authenticate();
         }
 
         private void ButtonCancelar_Click(object sender, RoutedEventArgs e)
@@ -47,25 +31,29 @@ namespace WhatToDo.View
             Frame.Navigate(typeof(IntroPage));
         }
 
-        private async void PasswordSenha_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void PasswordSenha_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                string email = TextEmail.Text;
-                string senha = PasswordSenha.Password;
-                if (email == "admin" && senha == "admin")
-                {
-                    Frame.Navigate(typeof(MainPage), new Usuario("admin"));
-                }
-                else if (DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
-                {
-                    Frame.Navigate(typeof(MainPage), new Usuario(email));
-                }
-                else
-                {
-                    msg = new MessageDialog("Error! Invalid email or password. Try again.");
-                    await msg.ShowAsync();
-                }
+                Authenticate();
+            }
+        }
+
+        private void Authenticate()
+        {
+            string email = TextEmail.Text;
+            string senha = PasswordSenha.Password;
+            if (email == "admin" && senha == "admin")
+            {
+                Frame.Navigate(typeof(MainPage), new Usuario("admin"));
+            }
+            else if (DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+            {
+                Frame.Navigate(typeof(MainPage), new Usuario(email));
+            }
+            else
+            {
+                LabelErro.Visibility = Visibility.Visible;
             }
         }
     }

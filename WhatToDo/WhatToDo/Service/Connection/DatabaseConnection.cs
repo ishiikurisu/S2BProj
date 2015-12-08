@@ -87,7 +87,6 @@ namespace WhatToDo.Service.Connection
 					else
 					{
 						reader.Close();
-						connection.Close();
 
 						return 2;
 					}
@@ -96,7 +95,6 @@ namespace WhatToDo.Service.Connection
 				else
 				{
 					reader.Close();
-					connection.Close();
 
 					return 1;
 				}
@@ -129,5 +127,40 @@ namespace WhatToDo.Service.Connection
 
             }
         }
+
+		// Search for a Usuario on the database by an email and return it
+		// Return null if the user was not found
+		public static Usuario GetUsuario(string email)
+		{
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				string sql;
+				MySqlCommand cmd;
+
+				// Query to look for email on user table
+				sql = "SELECT * FROM TB_Usuario WHERE email = @email";
+				cmd = new MySqlCommand(sql, connection);
+				cmd.Parameters.AddWithValue("@email", email);
+
+				var reader = cmd.ExecuteReader();
+
+				if(reader.Read())
+				{
+					Usuario usuario = new Usuario(email);
+
+					usuario.Nome = reader.GetString("nome");
+					usuario.Senha = "";
+					usuario.Perfil = reader.GetString("perfil");
+
+					reader.Close();
+
+					return usuario;
+				}
+			}
+
+			return null;
+		}
     }
 }

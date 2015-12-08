@@ -2,6 +2,7 @@
 using WhatToDo.Service.Constants;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using WhatToDo.Service.Connection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -15,6 +16,8 @@ namespace WhatToDo
         public IntroPage()
         {
             this.InitializeComponent();
+
+			var usr = DatabaseConnection.GetUsuario("joe@bacon.pizza");
         }
 
         private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)

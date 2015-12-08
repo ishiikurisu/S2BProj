@@ -25,11 +25,13 @@ namespace WhatToDo.View
     public sealed partial class PageCreate : Page
     {
         private Usuario User { get; set; }
-        private static bool MenuOpened { get; set; }
+        private bool MenuOpened { get; set; }
         public PageCreate()
         {
             this.InitializeComponent();
             MenuOpened = true;
+            MyMap.Height = Window.Current.Bounds.Height;
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
         }
 
         async void MyMap_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
@@ -78,6 +80,7 @@ namespace WhatToDo.View
                 ColumnMenu.Width = new GridLength(200);
             }
 
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
         }
     }

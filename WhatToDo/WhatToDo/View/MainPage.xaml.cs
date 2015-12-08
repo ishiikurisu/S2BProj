@@ -29,10 +29,12 @@ namespace WhatToDo
     public sealed partial class MainPage : Page
     {
         public Usuario User{ get; set; }
-        private static bool MenuOpened { get; set; }
+        private bool MenuOpened { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
+            MapEvents.Height = Window.Current.Bounds.Height;
+            MapEvents.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = true;
         }
 
@@ -71,6 +73,7 @@ namespace WhatToDo
                 ColumnMenu.Width = new GridLength(200);
             }
 
+            MapEvents.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
         }
     }

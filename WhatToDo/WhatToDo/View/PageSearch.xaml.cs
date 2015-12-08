@@ -21,8 +21,8 @@ namespace WhatToDo.View
         public PageSearch()
         {
             this.InitializeComponent();
-            //MyMap.Height = Window.Current.Bounds.Height;
-            //MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            MyMap.Height = Window.Current.Bounds.Height;
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = true;
         }
 
@@ -52,7 +52,7 @@ namespace WhatToDo.View
                 ColumnMenu.Width = new GridLength(200);
             }
 
-            //MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
         }
 

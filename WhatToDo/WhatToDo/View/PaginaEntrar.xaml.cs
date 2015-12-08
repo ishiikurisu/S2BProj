@@ -50,6 +50,7 @@ namespace WhatToDo.View
             }
             else if (DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
             {
+                /* este usuario deve vir com nome */
                 Frame.Navigate(typeof(MainPage), new Usuario(email));
             }
             else

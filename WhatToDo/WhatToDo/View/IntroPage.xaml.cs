@@ -16,8 +16,6 @@ namespace WhatToDo
         public IntroPage()
         {
             this.InitializeComponent();
-
-			var usr = DatabaseConnection.GetUsuario("joe@bacon.pizza");
         }
 
         private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)

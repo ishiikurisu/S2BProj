@@ -41,7 +41,15 @@ namespace WhatToDo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             User = e.Parameter as Usuario;
-            LabelUser.Text = User.Email;
+            try
+            {
+                LabelUser.Text = User.Nome;
+                /* it never shows the user's name. why? */
+            }
+            catch (Exception any)
+            {
+                LabelUser.Text = User.Email;
+            }
         }
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)

@@ -25,7 +25,7 @@ namespace WhatToDo.View
     public sealed partial class PageCreate : Page
     {
         private Usuario User { get; set; }
-        private bool MenuOpened { get; set; }
+        private static bool MenuOpened { get; set; }
         public PageCreate()
         {
             this.InitializeComponent();
@@ -75,7 +75,7 @@ namespace WhatToDo.View
                 LabelLocal.Visibility = Visibility.Visible;
                 TextLocal.Visibility = Visibility.Visible;
                 ButtonCollapse.Content = "<<<";
-                ColumnMenu.Width = new GridLength(300);
+                ColumnMenu.Width = new GridLength(200);
             }
 
             MenuOpened = !MenuOpened;

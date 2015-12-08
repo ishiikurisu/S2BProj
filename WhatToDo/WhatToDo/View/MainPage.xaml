@@ -10,16 +10,16 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="ColumnMenu" Width="40"/>
+            <ColumnDefinition x:Name="ColumnMenu" Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="PanelProfile" Grid.Column="0">
-            <TextBlock x:Name="ImageExpand" Margin="10" HorizontalAlignment="Center" Text=">" PointerPressed="ImageExpand_PointerPressed"></TextBlock>
+            <TextBlock x:Name="ImageExpand" Margin="10" HorizontalAlignment="Center" Text="&lt;&lt;&lt;" PointerPressed="ImageExpand_PointerPressed"></TextBlock>
             <Image x:Name="ImageUser" Margin="10" HorizontalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png"/>
-            <TextBlock x:Name="LabelUser" Margin="10" Visibility="Collapsed" HorizontalAlignment="Center"/>
-            <Button x:Name="ButtonCreate" Margin="10" Visibility="Collapsed" HorizontalAlignment="Center" Content="Criar evento" FontSize="20" Click="ButtonCreate_Click"/>
-            <Button x:Name="ButtonSearch" Margin="10" Visibility="Collapsed" HorizontalAlignment="Center" Content="Procurar evento" FontSize="20" Click="ButtonSearch_Click" />
+            <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"/>
+            <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="20" Click="ButtonCreate_Click"/>
+            <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="20" Click="ButtonSearch_Click" />
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">
             <Maps:Map x:Name="MapEvents" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="800" />

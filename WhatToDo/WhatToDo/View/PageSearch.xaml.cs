@@ -47,7 +47,7 @@ namespace WhatToDo.View
                 TextQuery.Visibility = Visibility.Visible;
                 TextResults.Visibility = Visibility.Visible;
                 ButtonCollapse.Content = "<<<";
-                ColumnMenu.Width = new GridLength(300);
+                ColumnMenu.Width = new GridLength(200);
             }
 
             MenuOpened = !MenuOpened;

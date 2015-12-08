@@ -43,6 +43,7 @@ namespace WhatToDo.View
         {
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
+
             if (email == "admin" && senha == "admin")
             {
                 Frame.Navigate(typeof(MainPage), new Usuario("admin"));

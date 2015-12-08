@@ -29,12 +29,11 @@ namespace WhatToDo
     public sealed partial class MainPage : Page
     {
         public Usuario User{ get; set; }
-        private bool MenuOpened { get; set; }
+        private static bool MenuOpened { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
-            MenuOpened = false;
-            /* carregar usuário */
+            MenuOpened = true;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

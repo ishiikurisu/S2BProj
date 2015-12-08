@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="ColumnMenu" Width="300"/>
+            <ColumnDefinition x:Name="ColumnMenu" Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 

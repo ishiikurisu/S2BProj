@@ -39,7 +39,7 @@ namespace WhatToDo.View
             this.MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
             Bing.Maps.Pushpin pushpin = new Bing.Maps.Pushpin();
             pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
-            var msg = new MessageDialog(e.GetCurrentPoint(MyMap).Position.ToString());
+            var msg = new MessageDialog("" + l.Latitude.ToString() + " " + l.Longitude.ToString());
             await msg.ShowAsync();
             this.MyMap.Children.Add(pushpin);
         }

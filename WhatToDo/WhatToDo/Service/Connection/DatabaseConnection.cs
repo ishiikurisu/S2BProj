@@ -100,32 +100,6 @@ namespace WhatToDo.Service.Connection
 
 			}
         }
-        //Insert Command Model
-        public static void ConnectionTest()
-        {
-            Usuario test = new Usuario("Ygor", "11235813", "ygordanniel@gmail.com", "Longos dias e belas noites.");
-            try
-            {
-                using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
-                {
-                    connection.Open();
-                    string InserUsuarioCommand = "INSERT INTO TB_Usuario (email) VALUES (@email)";
-                    using (var command = new MySqlCommand(InserUsuarioCommand, connection))
-                    {
-                        command.Parameters.AddWithValue("@email", test.Email);
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (MySqlException mse)
-            {
-
-            }
-            catch (NotImplementedException nie)
-            {
-
-            }
-        }
 
 		// Search for a Usuario on the database by an email and return it
 		// Return null if the user was not found
@@ -180,6 +154,7 @@ namespace WhatToDo.Service.Connection
 
 				cmd.ExecuteNonQuery();
 			}
+
 		}
 
 		// Search for all activities of a given category and near a location given a radius(in km)

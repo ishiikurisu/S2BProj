@@ -15,5 +15,10 @@ namespace WhatToDo.Controller
         {
             return DatabaseConnection.InsertUsuario(UsuarioCasdatro);
         }
+
+        public void DataBaseCaller(Atividade AtividadeCadastro)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

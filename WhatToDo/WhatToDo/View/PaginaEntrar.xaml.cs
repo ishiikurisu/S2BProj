@@ -22,7 +22,6 @@ namespace WhatToDo.View
 
         private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
-            PaginaEntrarController PEC = new PaginaEntrarController();
             Authenticate();
         }
 
@@ -41,6 +40,7 @@ namespace WhatToDo.View
 
         private void Authenticate()
         {
+            PaginaEntrarController PEC = new PaginaEntrarController();
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
 
@@ -48,10 +48,10 @@ namespace WhatToDo.View
             {
                 Frame.Navigate(typeof(MainPage), new Usuario("admin"));
             }
-            else if (DatabaseConnection.ValidateRegister(new Usuario(email, senha)) == 0)
+            else if (PEC.DataBaseCaller(new Usuario(email, senha)) == 0)
             {
                 /* este usuario deve vir com nome */
-                Frame.Navigate(typeof(MainPage), new Usuario(email));
+                Frame.Navigate(typeof(MainPage), PEC.DataBaseCaller(email));
             }
             else
             {

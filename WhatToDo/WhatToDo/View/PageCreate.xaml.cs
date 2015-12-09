@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WhatToDo.Controller;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -105,7 +106,8 @@ namespace WhatToDo.View
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            /* adicionar controle para adicionar atividade */
+            PageCreateController PCC = new PageCreateController();
+            PCC.DataBaseCaller(new Atividade(TextNome.Text, 1, TextLocal.Text, "fut dos brothers", new DateTime()));
         }
     }
 }

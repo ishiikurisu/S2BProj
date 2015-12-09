@@ -23,11 +23,14 @@
             <TextBox x:Name="TextNome" Margin="20,0"></TextBox>
             <TextBlock x:Name="LabelLocal" Margin="10,5" Text="Local" />
             <TextBox x:Name="TextLocal" Margin="20,0" ></TextBox>
+            <TextBlock x:Name="LabelCategoria" Margin="10,5" Text="Categoria" />
+            <ComboBox x:Name="CBCategoria" Margin="20,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center" Click="ButtonCreate_Click"></Button>
                 
             </StackPanel>
             
+
         </StackPanel>
         <Grid Grid.Column="1">
             <Maps:Map x:Name="MyMap" ViewChanged="MyMap_ViewChanged" PointerReleasedOverride="MyMap_PointerReleasedOverride" HorizontalAlignment="Left" VerticalAlignment="Top" />

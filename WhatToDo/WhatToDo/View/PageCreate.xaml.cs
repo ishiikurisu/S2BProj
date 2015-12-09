@@ -43,9 +43,14 @@ namespace WhatToDo.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             User = e.Parameter as Usuario;
-        }
 
-        private void ButtonReturn_Click(object sender, RoutedEventArgs e)
+			// TODO:
+			//
+			// Adicionar a lista de nomes das categorias que são pegas do banco usando GetCategorias()
+			// CBCategoria.ItemsSource = LISTA
+		}
+
+		private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage), User);
         }
@@ -107,6 +112,8 @@ namespace WhatToDo.View
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
             PageCreateController PCC = new PageCreateController();
+			// TODO
+			// Pegar o id da categoria que está selecionada em CBCategoria
             PCC.DataBaseCaller(new Atividade(TextNome.Text, 1, TextLocal.Text, "fut dos brothers", new DateTime()));
         }
     }

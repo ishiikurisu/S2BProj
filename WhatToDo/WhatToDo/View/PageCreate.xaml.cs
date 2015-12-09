@@ -44,14 +44,7 @@ namespace WhatToDo.View
         {
             User = e.Parameter as Usuario;
             List<Categoria> LCategoria = new PageCreateController().DataBaseCaller();
-            foreach (var categoria in LCategoria)
-            {
-                CBCategoria.Items.Add(categoria.Nome);
-            }
-            // TODO:
-            //
-            // Adicionar a lista de nomes das categorias que são pegas do banco usando GetCategorias()
-            // CBCategoria.ItemsSource = LISTA
+			CBCategoria.ItemsSource = LCategoria;
         }
 
 		private void ButtonReturn_Click(object sender, RoutedEventArgs e)
@@ -116,19 +109,9 @@ namespace WhatToDo.View
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
             PageCreateController PCC = new PageCreateController();
-            // TODO
-            // Pegar o id da categoria que está selecionada em CBCategoria
-            List<Categoria> LCategoria = new PageCreateController().DataBaseCaller();
-            int categoriaId = -1;
-            foreach (var categoria in LCategoria)
-            {
-                if (categoria.Nome.Equals(CBCategoria.SelectedItem))
-                {
-                    categoriaId = categoria.IdCategoria;
-                    break;
-                }
-            }
-            PCC.DataBaseCaller(new Atividade(TextNome.Text, categoriaId, TextLocal.Text, "fut dos brothers", new DateTime()));
+			var categoria = (Categoria)CBCategoria.SelectedItem;
+
+			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, TextLocal.Text, TextDescricao.Text, new DateTime()));
         }
     }
 }

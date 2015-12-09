@@ -22,5 +22,10 @@ namespace WhatToDo.Model.Entity
             this.Nome = nome;
             this.Icone = icone;
         }
-    }
+
+		public override string ToString()
+		{
+			return Nome;
+		}
+	}
 }

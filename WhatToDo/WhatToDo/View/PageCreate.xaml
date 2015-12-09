@@ -20,12 +20,14 @@
                 <Button x:Name="ButtonCollapse" Margin="10" Content="&lt;&lt;&lt;" Background="Transparent" HorizontalAlignment="Center" Click="ButtonCollapse_Click"></Button>
             </StackPanel>
             <TextBlock x:Name="LabelNome" Margin="10,5" Text="Nome" />
-            <TextBox x:Name="TextNome" Margin="20,0"></TextBox>
+            <TextBox x:Name="TextNome" Margin="20,0" />
             <TextBlock x:Name="LabelLocal" Margin="10,5" Text="Local" />
-            <TextBox x:Name="TextLocal" Margin="20,0" ></TextBox>
+            <TextBox x:Name="TextLocal" Margin="20,0" />
             <TextBlock x:Name="LabelCategoria" Margin="10,5" Text="Categoria" />
             <ComboBox x:Name="CBCategoria" Margin="20,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock x:Name="LabelDescricao" Margin="10,5" Text="Descrição" />
+            <TextBox x:Name="TextDescricao" Margin="20,0" Height="150" TextWrapping="Wrap" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center" Click="ButtonCreate_Click"></Button>
                 
             </StackPanel>

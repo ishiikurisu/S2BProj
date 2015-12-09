@@ -33,7 +33,6 @@ namespace WhatToDo.Service.Connection
 				if (reader.GetInt16(0) == 1)
 				{
 					reader.Close();
-					connection.Close();
 					return 1;
 				}
 				reader.Close();
@@ -81,7 +80,6 @@ namespace WhatToDo.Service.Connection
 					if(password == usuario.Senha)
 					{
 						reader.Close();
-						connection.Close();
 
 						return 0;
 					}
@@ -195,7 +193,6 @@ namespace WhatToDo.Service.Connection
 				string sql;
 				MySqlCommand cmd;
 
-				// Query to look for email on user table
 				sql = "SELECT * FROM TB_Atividade WHERE id_categoria = @id_categoria";
 				cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@id_categoria", idCategoria);
@@ -221,6 +218,39 @@ namespace WhatToDo.Service.Connection
 				}
 
 				return listAtividade;
+			}
+		}
+
+		// Return a list of all Categorias on the database
+		public static List<Categoria> GetCategorias()
+		{
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				string sql;
+				MySqlCommand cmd;
+
+				// Query to look for email on user table
+				sql = "SELECT * FROM TB_Categoria";
+				cmd = new MySqlCommand(sql, connection);
+				var reader = cmd.ExecuteReader();
+
+				List<Categoria> listCategorias = new List<Categoria>();
+
+				while (reader.Read())
+				{
+					Categoria newCategoria = new Categoria();
+
+					newCategoria.IdCategoria = reader.GetInt16("id");
+					newCategoria.Nome = reader.GetString("nome");
+					newCategoria.Icone = reader.GetString("icone");
+
+					listCategorias.Add(newCategoria);
+				}
+
+				reader.Close();
+				return listCategorias;
 			}
 		}
     }

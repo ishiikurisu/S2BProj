@@ -17,8 +17,7 @@ namespace WhatToDo.Model.Entity
         public DateTime Data { get; set; }
 
 		public Atividade()
-		{
-		}
+		{}
 
         public Atividade(string nome, int idCategoria, string localizacao, string descricao, DateTime data)
         {

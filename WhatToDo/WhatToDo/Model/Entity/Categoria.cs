@@ -13,6 +13,10 @@ namespace WhatToDo.Model.Entity
         public int IdCategoria { get; set; }
         public string Nome { get; set; }
         public string Icone { get; set; }
+
+		public Categoria()
+		{ }
+
         public Categoria(string nome, string icone)
         {
             this.Nome = nome;

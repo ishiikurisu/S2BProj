@@ -111,7 +111,7 @@ namespace WhatToDo.View
             PageCreateController PCC = new PageCreateController();
 			var categoria = (Categoria)CBCategoria.SelectedItem;
 
-			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, TextLocal.Text, TextDescricao.Text, new DateTime()));
+			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, TextLocal.Text, TextDescricao.Text, DateTime.Now));
         }
     }
 }

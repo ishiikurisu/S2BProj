@@ -15,6 +15,11 @@ namespace WhatToDo.Model.Entity
         public string Localizacao { get; set; }
         public string Descricao { get; set; }
         public DateTime Data { get; set; }
+
+		public Atividade()
+		{
+		}
+
         public Atividade(string nome, int idCategoria, string localizacao, string descricao, DateTime data)
         {
             this.Nome = nome;

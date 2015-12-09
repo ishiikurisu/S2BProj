@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using WhatToDo.Model.Entity;
+using WhatToDo.Service.Auxiliar;
 using WhatToDo.Service.Constants;
 
 namespace WhatToDo.Service.Connection
@@ -179,6 +181,46 @@ namespace WhatToDo.Service.Connection
 				cmd.Parameters.AddWithValue("@data", atividade.Data);
 
 				cmd.ExecuteNonQuery();
+			}
+		}
+
+		// Search for all activities of a given category and near a location given a radius(in km)
+		// Return a IEnumerable containing these activities
+		public static List<Atividade> GetAtividades(string location, double radius, int idCategoria)
+		{
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				string sql;
+				MySqlCommand cmd;
+
+				// Query to look for email on user table
+				sql = "SELECT * FROM TB_Atividade WHERE id_categoria = @id_categoria";
+				cmd = new MySqlCommand(sql, connection);
+				cmd.Parameters.AddWithValue("@id_categoria", idCategoria);
+				var reader = cmd.ExecuteReader();
+
+				List<Atividade> listAtividade = new List<Atividade>();
+
+				while(reader.Read())
+				{
+					var registerLocation = reader.GetString("local");
+
+					if (!Geo.checkInsideRadius(location, registerLocation, 10))
+						continue;
+
+					Atividade newAtividade = new Atividade();
+					newAtividade.Nome = reader.GetString("nome");
+					newAtividade.IdCategoria = reader.GetInt16("id_categoria");
+					newAtividade.Localizacao = registerLocation;
+                    newAtividade.Descricao = reader.GetString("descricao");
+					newAtividade.Data = reader.GetDateTime("data");
+
+					listAtividade.Add(newAtividade);
+				}
+
+				return listAtividade;
 			}
 		}
     }

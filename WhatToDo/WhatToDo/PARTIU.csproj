@@ -102,6 +102,7 @@
     <Compile Include="Model\Entity\Categoria.cs" />
     <Compile Include="Model\Entity\Interesse.cs" />
     <Compile Include="Model\Entity\UsuarioAtividade.cs" />
+    <Compile Include="Service\Auxiliar\Geo.cs" />
     <Compile Include="Service\Connection\DatabaseConnection.cs" />
     <Compile Include="Service\Constant\DataBaseConstants.cs" />
     <Compile Include="Service\Interface\IDataBase.cs" />

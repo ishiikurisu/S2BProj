@@ -9,21 +9,16 @@ using WhatToDo.Service.Interface;
 
 namespace WhatToDo.Controller
 {
-    class PaginaEntrarController : IDataBase
+    class PageCreateController : IDataBase
     {
         public int DataBaseCaller(Usuario UsuarioCasdatro)
-        {
-            return DatabaseConnection.ValidateRegister(UsuarioCasdatro);
-        }
-
-        public void DataBaseCaller(Atividade AtividadeCadastro)
         {
             throw new NotImplementedException();
         }
 
-        public Usuario DataBaseCaller(string email)
+        public void DataBaseCaller(Atividade atividade)
         {
-            return DatabaseConnection.GetUsuario(email);
+            DatabaseConnection.InsertAtividade(atividade);
         }
     }
 }

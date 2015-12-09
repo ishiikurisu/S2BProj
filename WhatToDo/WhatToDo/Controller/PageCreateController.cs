@@ -11,7 +11,7 @@ namespace WhatToDo.Controller
 {
     class PageCreateController : IDataBase
     {
-        public int DataBaseCaller(Usuario UsuarioCasdatro)
+        public int DataBaseCaller(Usuario usuarioCasdatro)
         {
             throw new NotImplementedException();
         }
@@ -19,6 +19,11 @@ namespace WhatToDo.Controller
         public void DataBaseCaller(Atividade atividade)
         {
             DatabaseConnection.InsertAtividade(atividade);
+        }
+
+        public List<Categoria> DataBaseCaller()
+        {
+            return DatabaseConnection.GetCategorias();
         }
     }
 }

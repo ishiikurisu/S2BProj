@@ -11,9 +11,9 @@ namespace WhatToDo.Controller
 {
     class PaginaEntrarController : IDataBase
     {
-        public int DataBaseCaller(Usuario UsuarioCasdatro)
+        public int DataBaseCaller(Usuario usuarioCasdatro)
         {
-            return DatabaseConnection.ValidateRegister(UsuarioCasdatro);
+            return DatabaseConnection.ValidateRegister(usuarioCasdatro);
         }
 
         public void DataBaseCaller(Atividade AtividadeCadastro)

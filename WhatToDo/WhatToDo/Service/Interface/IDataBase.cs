@@ -9,7 +9,7 @@ namespace WhatToDo.Service.Interface
 {
     interface IDataBase
     {
-        int DataBaseCaller(Usuario UsuarioCasdatro);
+        int DataBaseCaller(Usuario usuarioCasdatro);
         void DataBaseCaller(Atividade AtividadeCadastro);
     }
 }

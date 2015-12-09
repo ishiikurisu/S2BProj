@@ -11,9 +11,9 @@ namespace WhatToDo.Controller
 {
     public class PageRegistrarController : IDataBase
     {
-        public int DataBaseCaller(Usuario UsuarioCasdatro)
+        public int DataBaseCaller(Usuario usuarioCasdatro)
         {
-            return DatabaseConnection.InsertUsuario(UsuarioCasdatro);
+            return DatabaseConnection.InsertUsuario(usuarioCasdatro);
         }
 
         public void DataBaseCaller(Atividade AtividadeCadastro)

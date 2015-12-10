@@ -29,7 +29,7 @@ namespace WhatToDo.View
         private Usuario User { get; set; }
         private bool MenuOpened { get; set; }
         private bool MapMoved { get; set; }
-		private string localGps;
+		private string localGps = "";
 
         public PageCreate()
         {
@@ -46,6 +46,7 @@ namespace WhatToDo.View
             User = e.Parameter as Usuario;
             List<Categoria> LCategoria = new PageCreateController().DataBaseCaller();
 			CBCategoria.ItemsSource = LCategoria;
+			CBCategoria.SelectedIndex = 0;
         }
 
 		private void ButtonReturn_Click(object sender, RoutedEventArgs e)
@@ -106,9 +107,11 @@ namespace WhatToDo.View
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
             PageCreateController PCC = new PageCreateController();
-			var categoria = (Categoria)CBCategoria.SelectedItem;
 
-			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, DateTime.Now));
+			var categoria = (Categoria)CBCategoria.SelectedItem;
+			DateTime date = PickerDate.Date.Date.Add(PickerTime.Time);
+
+			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, date));
         }
     }
 }

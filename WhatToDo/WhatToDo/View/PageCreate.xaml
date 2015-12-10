@@ -28,7 +28,6 @@
             <TextBlock x:Name="LabelData" Margin="10,5" Text="Data" />
             <DatePicker x:Name="PickerDate" HorizontalAlignment="Stretch" Margin="20,0" VerticalAlignment="Stretch" MinWidth="250" />
             <TimePicker x:Name="PickerTime" HorizontalAlignment="Stretch" Margin="20,5" VerticalAlignment="Stretch"/>
-
             <TextBlock x:Name="LabelDescricao" Margin="10,5" Text="Descrição" />
             <TextBox x:Name="TextDescricao" Margin="20,0" Height="150" TextWrapping="Wrap" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

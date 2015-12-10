@@ -20,6 +20,7 @@
             <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"/>
             <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="20" Click="ButtonCreate_Click"/>
             <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="20" Click="ButtonSearch_Click" />
+            <Button x:Name="ButtonRefresh" Margin="10" HorizontalAlignment="Center" Content="Recarregar" FontSize="20" Click="ButtonRefresh_Click" />
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">
             <Maps:Map x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" />

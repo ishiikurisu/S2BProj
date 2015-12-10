@@ -19,6 +19,8 @@ using Bing.Maps;
 using WhatToDo.Model.Entity;
 using WhatToDo.View;
 using WhatToDo.Controller;
+using Windows.Devices.Input;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,11 +33,16 @@ namespace WhatToDo
     {
         public Usuario User{ get; set; }
         private bool MenuOpened { get; set; }
+        private List<Atividade> Atividades;
+
         public MainPage()
         {
+            MainPageController MPC = new MainPageController();
+
             this.InitializeComponent();
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            Atividades = MPC.DataBaseCaller();
             ShowEventos();
             MenuOpened = true;
         }
@@ -49,9 +56,7 @@ namespace WhatToDo
             Bing.Maps.Location l;
             Bing.Maps.Pushpin pushpin;
 
-            MainPageController MPC = new MainPageController();
-            List<Atividade> atividades = MPC.DataBaseCaller();
-            foreach (var atividade in atividades)
+            foreach (var atividade in Atividades)
             {
                 geoloc = atividade.LocalGPS.Split(' ');
                 latitude = double.Parse(geoloc[0]);
@@ -60,6 +65,7 @@ namespace WhatToDo
                 //MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
                 pushpin = new Bing.Maps.Pushpin();
                 pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+                pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
             }
         }
@@ -109,6 +115,26 @@ namespace WhatToDo
 
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
+        }
+
+        async private void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
+        {
+            Pushpin pushpin = sender as Pushpin;
+            Location local = pushpin.GetValue(MapLayer.PositionProperty) as Location;
+
+            foreach (var atividade in Atividades)
+            {
+                string[] geoloc = atividade.LocalGPS.Split(' ');
+                double latitude = double.Parse(geoloc[0]);
+                double longitude = double.Parse(geoloc[1]);
+
+                if (latitude == local.Latitude && longitude == local.Longitude)
+                {
+                    var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
+                    await msg.ShowAsync();
+                    break;
+                }
+            }
         }
     }
 }

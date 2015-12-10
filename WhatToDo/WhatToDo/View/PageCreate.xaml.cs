@@ -62,6 +62,16 @@ namespace WhatToDo.View
                 ButtonCreate.Visibility = Visibility.Collapsed;
                 LabelNome.Visibility = Visibility.Collapsed;
                 TextNome.Visibility = Visibility.Collapsed;
+                LabelCategoria.Visibility = Visibility.Collapsed;
+                CBCategoria.Visibility = Visibility.Collapsed;
+                LabelLocal.Visibility = Visibility.Collapsed;
+                TextLocal.Visibility = Visibility.Collapsed;
+                LabelData.Visibility = Visibility.Collapsed;
+                PickerDate.Visibility = Visibility.Collapsed;
+                PickerTime.Visibility = Visibility.Collapsed;
+                LabelDescricao.Visibility = Visibility.Collapsed;
+                TextDescricao.Visibility = Visibility.Collapsed;
+
                 ButtonCollapse.Content = ">";
                 ColumnMenu.Width = new GridLength(60);
             }
@@ -71,6 +81,16 @@ namespace WhatToDo.View
                 ButtonCreate.Visibility = Visibility.Visible;
                 LabelNome.Visibility = Visibility.Visible;
                 TextNome.Visibility = Visibility.Visible;
+                LabelCategoria.Visibility = Visibility.Visible;
+                CBCategoria.Visibility = Visibility.Visible;
+                LabelLocal.Visibility = Visibility.Visible;
+                TextLocal.Visibility = Visibility.Visible;
+                LabelData.Visibility = Visibility.Visible;
+                PickerDate.Visibility = Visibility.Visible;
+                PickerTime.Visibility = Visibility.Visible;
+                LabelDescricao.Visibility = Visibility.Visible;
+                TextDescricao.Visibility = Visibility.Visible;
+
                 ButtonCollapse.Content = "<<<";
                 ColumnMenu.Width = new GridLength(200);
             }
@@ -112,6 +132,7 @@ namespace WhatToDo.View
 			DateTime date = PickerDate.Date.Date.Add(PickerTime.Time);
 
 			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, date));
+            Frame.Navigate(typeof(MainPage), User);
         }
     }
 }

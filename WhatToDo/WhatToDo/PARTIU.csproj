@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller\MainPageController.cs" />
     <Compile Include="Controller\PageCreateController.cs" />
     <Compile Include="Controller\PageRegistrarController.cs" />
     <Compile Include="Controller\PaginaEntrarController.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="Service\Auxiliar\Geo.cs" />
     <Compile Include="Service\Connection\DatabaseConnection.cs" />
     <Compile Include="Service\Constant\DataBaseConstants.cs" />
-    <Compile Include="Service\Interface\IDataBase.cs" />
     <Compile Include="View\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>

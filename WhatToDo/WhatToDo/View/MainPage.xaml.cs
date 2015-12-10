@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Shapes;
 using Bing.Maps;
 using WhatToDo.Model.Entity;
 using WhatToDo.View;
+using WhatToDo.Controller;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -33,9 +34,34 @@ namespace WhatToDo
         public MainPage()
         {
             this.InitializeComponent();
-            MapEvents.Height = Window.Current.Bounds.Height;
-            MapEvents.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            MyMap.Height = Window.Current.Bounds.Height;
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            ShowEventos();
             MenuOpened = true;
+        }
+
+        private void ShowEventos()
+        {
+            string [] geoloc;
+            double latitude;
+            double longitude;
+
+            Bing.Maps.Location l;
+            Bing.Maps.Pushpin pushpin;
+
+            MainPageController MPC = new MainPageController();
+            List<Atividade> atividades = MPC.DataBaseCaller();
+            foreach (var atividade in atividades)
+            {
+                geoloc = atividade.LocalGPS.Split(' ');
+                latitude = double.Parse(geoloc[0]);
+                longitude = double.Parse(geoloc[1]);
+                l = new Bing.Maps.Location(latitude, longitude);
+                //MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
+                pushpin = new Bing.Maps.Pushpin();
+                pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+                MyMap.Children.Add(pushpin);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -81,7 +107,7 @@ namespace WhatToDo
                 ColumnMenu.Width = new GridLength(200);
             }
 
-            MapEvents.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             MenuOpened = !MenuOpened;
         }
     }

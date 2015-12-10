@@ -158,9 +158,43 @@ namespace WhatToDo.Service.Connection
 
 		}
 
-		// Search for all activities of a given category and near a location given a radius(in km)
-		// Return a IEnumerable containing these activities
-		public static List<Atividade> GetAtividades(string location, double radius, int idCategoria)
+        // Search for all activities and near a location given a radius(in km)
+        // Return a IEnumerable containing these activities
+        public static List<Atividade> GetAtividades()
+        {
+            using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+            {
+                connection.Open();
+
+                string sql;
+                MySqlCommand cmd;
+
+                sql = "SELECT * FROM TB_Atividade";
+                cmd = new MySqlCommand(sql, connection);
+                var reader = cmd.ExecuteReader();
+
+                List<Atividade> listAtividade = new List<Atividade>();
+
+                while (reader.Read())
+                {
+                    Atividade newAtividade = new Atividade();
+                    newAtividade.Nome = reader.GetString("nome");
+                    newAtividade.IdCategoria = reader.GetInt16("id_categoria");
+                    newAtividade.LocalGPS = reader.GetString("localGPS");
+                    newAtividade.Local = reader.GetString("local");
+                    newAtividade.Descricao = reader.GetString("descricao");
+                    newAtividade.Data = reader.GetDateTime("data");
+
+                    listAtividade.Add(newAtividade);
+                }
+
+                return listAtividade;
+            }
+        }
+
+        // Search for all activities of a given category and near a location given a radius(in km)
+        // Return a IEnumerable containing these activities
+        public static List<Atividade> GetAtividadesByCategoria(string location, double radius, int idCategoria)
 		{
 			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
 			{

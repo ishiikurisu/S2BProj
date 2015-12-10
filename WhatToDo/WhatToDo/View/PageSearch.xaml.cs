@@ -36,18 +36,14 @@ namespace WhatToDo.View
             if (MenuOpened)
             {
                 ButtonReturn.Visibility = Visibility.Collapsed;
-                ButtonSearch.Visibility = Visibility.Collapsed;
-                TextQuery.Visibility = Visibility.Collapsed;
-                TextResults.Visibility = Visibility.Collapsed;
                 ButtonCollapse.Content = ">";
+                PanelOptions.Visibility = Visibility.Collapsed;
                 ColumnMenu.Width = new GridLength(60);
             }
             else
             {
                 ButtonReturn.Visibility = Visibility.Visible;
-                ButtonSearch.Visibility = Visibility.Visible;
-                TextQuery.Visibility = Visibility.Visible;
-                TextResults.Visibility = Visibility.Visible;
+                PanelOptions.Visibility = Visibility.Visible;
                 ButtonCollapse.Content = "<<<";
                 ColumnMenu.Width = new GridLength(200);
             }

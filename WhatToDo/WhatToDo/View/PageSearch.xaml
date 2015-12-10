@@ -20,9 +20,21 @@
                 <Button x:Name="ButtonCollapse" Content="&lt;&lt;&lt;" Background="Transparent" Margin="10" Click="ButtonCollapse_Click"></Button>
             </StackPanel>
             <StackPanel x:Name="PanelOptions">
-                <Button x:Name="ButtonSearch" Margin="10" Content="Buscar"></Button>
-                <TextBox x:Name="TextQuery" Margin="10"></TextBox>
-                <TextBlock x:Name="TextResults" Margin="10"></TextBlock>
+                <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
+                <TextBox x:Name="TextCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" ></TextBox>
+                <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
+                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10"></TextBox>
+                <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="De" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker x:Name="FromData" MinWidth="120" Margin="10" VerticalAlignment="Center"></DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Até" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker x:Name="ToData" MinWidth="120" Margin="10" VerticalAlignment="Center"></DatePicker>
+                </StackPanel>
+                <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
+                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ></Slider>
             </StackPanel>
         </StackPanel>
 

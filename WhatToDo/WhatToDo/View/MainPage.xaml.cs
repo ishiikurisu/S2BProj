@@ -150,11 +150,16 @@ namespace WhatToDo
             }
         }
 
-        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        async private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+            var coord = pos.Coordinate.Point;
+
+            string location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
             MainPageController MPC = new MainPageController();
             MyMap.Children.Clear();
-            Atividades = MPC.DataBaseCaller();
+            Atividades = MPC.DataBaseCaller(location);
             ShowEventos();
         }
     }

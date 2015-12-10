@@ -6,6 +6,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WhatToDo.Model.Entity;
+using Windows.UI.Popups;
+using System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,18 +38,14 @@ namespace WhatToDo.View
             if (MenuOpened)
             {
                 ButtonReturn.Visibility = Visibility.Collapsed;
-                ButtonSearch.Visibility = Visibility.Collapsed;
-                TextQuery.Visibility = Visibility.Collapsed;
-                TextResults.Visibility = Visibility.Collapsed;
                 ButtonCollapse.Content = ">";
+                PanelOptions.Visibility = Visibility.Collapsed;
                 ColumnMenu.Width = new GridLength(60);
             }
             else
             {
                 ButtonReturn.Visibility = Visibility.Visible;
-                ButtonSearch.Visibility = Visibility.Visible;
-                TextQuery.Visibility = Visibility.Visible;
-                TextResults.Visibility = Visibility.Visible;
+                PanelOptions.Visibility = Visibility.Visible;
                 ButtonCollapse.Content = "<<<";
                 ColumnMenu.Width = new GridLength(200);
             }
@@ -59,6 +57,36 @@ namespace WhatToDo.View
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage), User);
+        }
+
+        private async void TextCategory_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+        }
+
+        private void TextName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+        }
+
+        private void FromData_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+        }
+
+        private void ToData_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+        }
+
+        private void SliderRaio_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
         }
     }
 }

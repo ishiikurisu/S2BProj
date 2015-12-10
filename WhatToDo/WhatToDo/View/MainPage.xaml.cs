@@ -42,9 +42,22 @@ namespace WhatToDo
             this.InitializeComponent();
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
-            Atividades = MPC.DataBaseCaller();
-            ShowEventos();
+
+            GetLocation(MPC);
+
             MenuOpened = true;
+        }
+
+        private async void GetLocation(MainPageController MPC)
+        {
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+            var coord = pos.Coordinate.Point;
+
+            string location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
+
+            Atividades = MPC.DataBaseCaller(location);
+            ShowEventos();
         }
 
         private void ShowEventos()

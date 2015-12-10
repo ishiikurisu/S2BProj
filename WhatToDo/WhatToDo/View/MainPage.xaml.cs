@@ -136,5 +136,13 @@ namespace WhatToDo
                 }
             }
         }
+
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageController MPC = new MainPageController();
+            MyMap.Children.Clear();
+            Atividades = MPC.DataBaseCaller();
+            ShowEventos();
+        }
     }
 }

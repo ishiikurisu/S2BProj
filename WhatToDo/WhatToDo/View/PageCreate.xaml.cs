@@ -29,6 +29,7 @@ namespace WhatToDo.View
         private Usuario User { get; set; }
         private bool MenuOpened { get; set; }
         private bool MapMoved { get; set; }
+		private string localGps;
 
         public PageCreate()
         {
@@ -37,7 +38,7 @@ namespace WhatToDo.View
             MenuOpened = true;
             MapMoved = false;
             MyMap.Height = Window.Current.Bounds.Height;
-            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
+            MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.ActualWidth.ToString());
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -60,8 +61,6 @@ namespace WhatToDo.View
                 ButtonCreate.Visibility = Visibility.Collapsed;
                 LabelNome.Visibility = Visibility.Collapsed;
                 TextNome.Visibility = Visibility.Collapsed;
-                LabelLocal.Visibility = Visibility.Collapsed;
-                TextLocal.Visibility = Visibility.Collapsed;
                 ButtonCollapse.Content = ">";
                 ColumnMenu.Width = new GridLength(60);
             }
@@ -71,8 +70,6 @@ namespace WhatToDo.View
                 ButtonCreate.Visibility = Visibility.Visible;
                 LabelNome.Visibility = Visibility.Visible;
                 TextNome.Visibility = Visibility.Visible;
-                LabelLocal.Visibility = Visibility.Visible;
-                TextLocal.Visibility = Visibility.Visible;
                 ButtonCollapse.Content = "<<<";
                 ColumnMenu.Width = new GridLength(200);
             }
@@ -101,7 +98,7 @@ namespace WhatToDo.View
             MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
             Bing.Maps.Pushpin pushpin = new Bing.Maps.Pushpin();
             pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
-            TextLocal.Text = "" + l.Latitude.ToString() + " " + l.Longitude.ToString();
+            localGps = "" + l.Latitude.ToString() + " " + l.Longitude.ToString();
             MyMap.Children.Clear();
             MyMap.Children.Add(pushpin);
         }
@@ -111,7 +108,7 @@ namespace WhatToDo.View
             PageCreateController PCC = new PageCreateController();
 			var categoria = (Categoria)CBCategoria.SelectedItem;
 
-			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, TextLocal.Text, TextDescricao.Text, new DateTime()));
+			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, DateTime.Now));
         }
     }
 }

@@ -143,12 +143,13 @@ namespace WhatToDo.Service.Connection
 			{
 				connection.Open();
 
-				var sql = "INSERT INTO TB_Atividade(nome, id_categoria, local, descricao, data) VALUES (@nome, @id_categoria, @local, @descricao, @data)";
+				var sql = "INSERT INTO TB_Atividade(nome, id_categoria, localGPS, local, descricao, data) VALUES (@nome, @id_categoria, @localGPS, @local, @descricao, @data)";
 
 				var cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@nome", atividade.Nome);
 				cmd.Parameters.AddWithValue("@id_categoria", atividade.IdCategoria);
-				cmd.Parameters.AddWithValue("@local", atividade.Localizacao);
+				cmd.Parameters.AddWithValue("@localGPS", atividade.LocalGPS);
+				cmd.Parameters.AddWithValue("@local", atividade.Local);
 				cmd.Parameters.AddWithValue("@descricao", atividade.Descricao);
 				cmd.Parameters.AddWithValue("@data", atividade.Data);
 
@@ -177,7 +178,7 @@ namespace WhatToDo.Service.Connection
 
 				while(reader.Read())
 				{
-					var registerLocation = reader.GetString("local");
+					var registerLocation = reader.GetString("localGPS");
 
 					if (!Geo.checkInsideRadius(location, registerLocation, 10))
 						continue;
@@ -185,7 +186,8 @@ namespace WhatToDo.Service.Connection
 					Atividade newAtividade = new Atividade();
 					newAtividade.Nome = reader.GetString("nome");
 					newAtividade.IdCategoria = reader.GetInt16("id_categoria");
-					newAtividade.Localizacao = registerLocation;
+					newAtividade.LocalGPS = registerLocation;
+					newAtividade.Local = reader.GetString("local");
                     newAtividade.Descricao = reader.GetString("descricao");
 					newAtividade.Data = reader.GetDateTime("data");
 

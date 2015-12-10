@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="ColumnMenu" Width="300"/>
+            <ColumnDefinition x:Name="ColumnMenu" Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
@@ -20,18 +20,18 @@
                 <Button x:Name="ButtonCollapse" Margin="10" Content="&lt;&lt;&lt;" Background="Transparent" HorizontalAlignment="Center" Click="ButtonCollapse_Click"></Button>
             </StackPanel>
             <TextBlock x:Name="LabelNome" Margin="10,5" Text="Nome" />
-            <TextBox x:Name="TextNome" Margin="20,0" />
+            <TextBox x:Name="TextNome" Margin="10,0" />
             <TextBlock x:Name="LabelCategoria" Margin="10,5" Text="Categoria" />
-            <ComboBox x:Name="CBCategoria" Margin="20,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <ComboBox x:Name="CBCategoria" Margin="10,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <TextBlock x:Name="LabelLocal" Margin="10,5" Text="Local" />
-            <TextBox x:Name="TextLocal" Margin="20,0" />
+            <TextBox x:Name="TextLocal" Margin="10,0" />
             <TextBlock x:Name="LabelData" Margin="10,5" Text="Data" />
-            <DatePicker x:Name="PickerDate" HorizontalAlignment="Stretch" Margin="20,0" VerticalAlignment="Stretch" MinWidth="250" />
-            <TimePicker x:Name="PickerTime" HorizontalAlignment="Stretch" Margin="20,5" VerticalAlignment="Stretch"/>
+            <DatePicker x:Name="PickerDate" HorizontalAlignment="Stretch" Margin="10,0" VerticalAlignment="Stretch" MinWidth="150" />
+            <TimePicker x:Name="PickerTime" HorizontalAlignment="Stretch" Margin="10,5" VerticalAlignment="Stretch" MinWidth="150"/>
             <TextBlock x:Name="LabelDescricao" Margin="10,5" Text="Descrição" />
-            <TextBox x:Name="TextDescricao" Margin="20,0" Height="150" TextWrapping="Wrap" />
+            <TextBox x:Name="TextDescricao" Margin="10,0" Height="150" TextWrapping="Wrap" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="ButtonCreate" Margin="20" Content="Criar" HorizontalAlignment="Center" Click="ButtonCreate_Click"></Button>
+                <Button x:Name="ButtonCreate" Margin="10" Content="Criar" HorizontalAlignment="Center" Click="ButtonCreate_Click"></Button>
 
             </StackPanel>
 

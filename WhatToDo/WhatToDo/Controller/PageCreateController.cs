@@ -5,17 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Connection;
-using WhatToDo.Service.Interface;
 
 namespace WhatToDo.Controller
 {
-    class PageCreateController : IDataBase
+    class PageCreateController
     {
-        public int DataBaseCaller(Usuario usuarioCasdatro)
-        {
-            throw new NotImplementedException();
-        }
-
         public void DataBaseCaller(Atividade atividade)
         {
             DatabaseConnection.InsertAtividade(atividade);

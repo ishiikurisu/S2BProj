@@ -22,7 +22,7 @@
             <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Procurar evento" FontSize="20" Click="ButtonSearch_Click" />
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">
-            <Maps:Map x:Name="MapEvents" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Maps:Map x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
         </Grid>
     </Grid>

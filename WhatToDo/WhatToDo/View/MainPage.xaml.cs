@@ -34,6 +34,7 @@ namespace WhatToDo
         public Usuario User{ get; set; }
         private bool MenuOpened { get; set; }
         private List<Atividade> Atividades;
+        private string location;
 
         public MainPage()
         {
@@ -43,21 +44,22 @@ namespace WhatToDo
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
 
-            GetLocation(MPC);
+            Atividades = MPC.DataBaseCaller();
+            ShowEventos();
 
             MenuOpened = true;
         }
 
-        private async void GetLocation(MainPageController MPC)
+        // Get current user location
+        // This method will update the location string variable 
+        // Format: "lat lon"
+        private async void GetLocation()
         {
             Geolocator locator = new Geolocator();
             Geoposition pos = await locator.GetGeopositionAsync();
             var coord = pos.Coordinate.Point;
 
-            string location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
-
-            Atividades = MPC.DataBaseCaller(location);
-            ShowEventos();
+            location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
         private void ShowEventos()
@@ -154,7 +156,7 @@ namespace WhatToDo
         {
             MainPageController MPC = new MainPageController();
             MyMap.Children.Clear();
-            Atividades = MPC.DataBaseCaller();
+            GetLocation(MPC);
             ShowEventos();
         }
     }

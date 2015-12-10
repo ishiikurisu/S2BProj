@@ -10,9 +10,9 @@ namespace WhatToDo.Controller
 {
     class MainPageController
     {
-        public List<Atividade> DataBaseCaller(string location)
+        public List<Atividade> DataBaseCaller()
         {
-            return DatabaseConnection.GetAtividades(location, 20);
+            return DatabaseConnection.GetAtividades();
         }
     }
 }

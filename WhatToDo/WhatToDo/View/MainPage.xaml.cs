@@ -156,8 +156,10 @@ namespace WhatToDo
         {
             MainPageController MPC = new MainPageController();
             MyMap.Children.Clear();
-            GetLocation(MPC);
+            Atividades = MPC.DataBaseCaller();
+            GetLocation();
             ShowEventos();
+            
         }
     }
 }

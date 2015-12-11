@@ -47,6 +47,9 @@ namespace WhatToDo.View
             User = e.Parameter as Usuario;
         }
 
+        // Get current user location
+        // This method will update the location string variable 
+        // Format: "lat lon"
         private async Task GetLocation()
         {
             Geolocator locator = new Geolocator();
@@ -57,11 +60,11 @@ namespace WhatToDo.View
             location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
-        private void ShowEventos()
+        private async void ShowEventos()
         {
             foreach (var atividade in Atividades)
             {
-                GetLocation();
+                await GetLocation();
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;

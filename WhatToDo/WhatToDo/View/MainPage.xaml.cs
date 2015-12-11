@@ -99,7 +99,6 @@ namespace WhatToDo
             try
             {
                 LabelUser.Text = User.Nome;
-                /* it never shows the user's name. why? */
             }
             catch (Exception any)
             {
@@ -178,18 +177,15 @@ namespace WhatToDo
             flop.ViewMode = PickerViewMode.Thumbnail;
             flop.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             flop.FileTypeFilter.Add(".jpg");
+            flop.FileTypeFilter.Add(".jpeg");
             flop.FileTypeFilter.Add(".png");
             StorageFile file = await flop.PickSingleFileAsync();
 
             if (file != null)
             {
-                //ImageUser.Source = new BitmapImage(new Uri(file.Path, UriKind.Absolute));
-                //ImageUser.Source = RandomAccessStreamReference.CreateFromUri(new Uri(file.Path));
                 using (IRandomAccessStream fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
-                    // Set the image source to the selected bitmap
                     BitmapImage bitmapImage = new BitmapImage();
-
                     await bitmapImage.SetSourceAsync(fileStream);
                     ImageUser.Source = bitmapImage;
                 }

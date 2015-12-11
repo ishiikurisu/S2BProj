@@ -126,12 +126,6 @@ namespace WhatToDo.View
             Frame.Navigate(typeof(MainPage), User);
         }
 
-        private async void TextCategory_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //TODO
-            //Implement search paranmeters
-        }
-
         private void TextName_LostFocus(object sender, RoutedEventArgs e)
         {
             //TODO

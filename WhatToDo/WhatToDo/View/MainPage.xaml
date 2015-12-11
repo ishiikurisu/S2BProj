@@ -16,7 +16,8 @@
 
         <StackPanel x:Name="PanelProfile" Grid.Column="0">
             <TextBlock x:Name="ImageExpand" Margin="10" HorizontalAlignment="Center" Text="&lt;&lt;&lt;" PointerPressed="ImageExpand_PointerPressed"></TextBlock>
-            <Image x:Name="ImageUser" Margin="10" HorizontalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png"/>
+            <Image x:Name="ImageUser" Margin="10" HorizontalAlignment="Center" Source="ms-appx:///Assets/Square150x150Logo.png" />
+            <!-- add PointerPressed="ImageUser_PointerPressed" to ImageUser when possible -->
             <TextBlock x:Name="LabelUser" Margin="10" HorizontalAlignment="Center"/>
             <Button x:Name="ButtonCreate" Margin="10" HorizontalAlignment="Center" Content="Criar evento" FontSize="20" Click="ButtonCreate_Click"/>
             <Button x:Name="ButtonSearch" Margin="10" HorizontalAlignment="Center" Content="Filtrar eventos" FontSize="20" Click="ButtonSearch_Click" />

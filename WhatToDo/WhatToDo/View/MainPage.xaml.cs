@@ -83,6 +83,7 @@ namespace WhatToDo
                 var l = new Location(latitude, longitude);
                 var pushpin = new Pushpin();
                 pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+                //pushpin.SetValue(Bing.Maps.MapLayer.StyleProperty, "icon:https://40.media.tumblr.com/9a64d09c9af0f4e50133b63651170417/tumblr_nz7rlzmiLE1ttpfgfo1_75sq.png");
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
             }
@@ -163,6 +164,10 @@ namespace WhatToDo
             GetLocation();
             ShowEventos();
             
+        }
+
+        private void ImageUser_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
         }
     }
 }

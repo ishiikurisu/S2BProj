@@ -24,7 +24,7 @@ namespace WhatToDo.View
         {
             PageRegistrarController PRC = new PageRegistrarController();
             //Usuario UsuarioCadastro = new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text);
-            if (PRC.DataBaseCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
+            if (PRC.DataBaseInsertUsuarioCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
             {
                 msg = new MessageDialog("Usuário cadastrado com sucesso!");
                 await msg.ShowAsync();

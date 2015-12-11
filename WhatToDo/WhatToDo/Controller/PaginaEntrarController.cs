@@ -6,11 +6,11 @@ namespace WhatToDo.Controller
 {
     class PaginaEntrarController
     {
-        public int DataBaseCaller(Usuario usuarioCasdatro)
+        public int DataBaseValidateRegisterCaller(Usuario usuarioCasdatro)
         {
             return DatabaseConnection.ValidateRegister(usuarioCasdatro);
         }
-        public Usuario DataBaseCaller(string email)
+        public Usuario DataBaseGetUsuarioCaller(string email)
         {
             return DatabaseConnection.GetUsuario(email);
         }

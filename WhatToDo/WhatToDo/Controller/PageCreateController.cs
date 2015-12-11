@@ -10,12 +10,12 @@ namespace WhatToDo.Controller
 {
     class PageCreateController
     {
-        public void DataBaseCaller(Atividade atividade)
+        public void DataBaseInsertAtividadeCaller(Atividade atividade)
         {
             DatabaseConnection.InsertAtividade(atividade);
         }
 
-        public List<Categoria> DataBaseCaller()
+        public List<Categoria> DataBaseGetCategoriasCaller()
         {
             return DatabaseConnection.GetCategorias();
         }

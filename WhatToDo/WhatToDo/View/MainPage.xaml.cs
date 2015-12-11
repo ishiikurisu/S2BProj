@@ -47,7 +47,7 @@ namespace WhatToDo
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
 
-            Atividades = mpc.DataBaseCaller();
+            Atividades = mpc.DataBaseGetAtividadeCaller();
             ShowEventos();
 
             MenuOpened = true;
@@ -82,7 +82,7 @@ namespace WhatToDo
                 var longitude = double.Parse(geoloc[1]);
                 var l = new Location(latitude, longitude);
                 var pushpin = new Pushpin();
-                pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+                pushpin.SetValue(MapLayer.PositionProperty, l);
                 //pushpin.SetValue(Bing.Maps.MapLayer.StyleProperty, "icon:https://40.media.tumblr.com/9a64d09c9af0f4e50133b63651170417/tumblr_nz7rlzmiLE1ttpfgfo1_75sq.png");
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
@@ -162,7 +162,7 @@ namespace WhatToDo
         {
             MainPageController MPC = new MainPageController();
             MyMap.Children.Clear();
-            Atividades = MPC.DataBaseCaller();
+            Atividades = MPC.DataBaseGetAtividadeCaller();
             GetLocation();
             ShowEventos();
             

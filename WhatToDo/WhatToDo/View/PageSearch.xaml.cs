@@ -28,6 +28,7 @@ namespace WhatToDo.View
         private Usuario User { get; set; }
         private List<Atividade> Atividades;
         private string location;
+        private List<Categoria> LCategorias; 
         public PageSearch()
         {
             GetLocation();
@@ -35,9 +36,10 @@ namespace WhatToDo.View
             PageSearchController psc = new PageSearchController();
 
             this.InitializeComponent();
+
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
-            Atividades = psc.DataBaseCaller();
+            Atividades = psc.DataBaseGetAtividadesCaller();
             ShowEventos();
             MenuOpened = true;
         }
@@ -45,6 +47,9 @@ namespace WhatToDo.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             User = e.Parameter as Usuario;
+            LCategorias = new PageCreateController().DataBaseGetCategoriasCaller();
+            CBCategory.ItemsSource = LCategorias;
+            CBCategory.SelectedItem = 0;
         }
 
         // Get current user location
@@ -74,7 +79,7 @@ namespace WhatToDo.View
                 var longitude = double.Parse(geoloc[1]);
                 var l = new Location(latitude, longitude);
                 var pushpin = new Pushpin();
-                pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
+                pushpin.SetValue(MapLayer.PositionProperty, l);
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
             }
@@ -130,6 +135,7 @@ namespace WhatToDo.View
         {
             //TODO
             //Implement search paranmeters
+            
         }
 
         private void FromData_LostFocus(object sender, RoutedEventArgs e)
@@ -148,6 +154,26 @@ namespace WhatToDo.View
         {
             //TODO
             //Implement search paranmeters
+        }
+
+        private async void CBCategory_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+            Categoria categoriacheck = CBCategory.SelectedItem as Categoria;
+            foreach (var atividade in Atividades)
+            {
+                if (atividade.IdCategoria != categoriacheck.IdCategoria)
+                {
+                    var geoloc = atividade.LocalGPS.Split(' ');
+                    var latitude = double.Parse(geoloc[0]);
+                    var longitude = double.Parse(geoloc[1]);
+                    var l = new Location(latitude, longitude);
+                    var pushpin = new Pushpin();
+                    pushpin.SetValue(MapLayer.PositionProperty, l);
+                    MyMap.Children.Clear();
+                }
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ namespace WhatToDo.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             User = e.Parameter as Usuario;
-            List<Categoria> LCategoria = new PageCreateController().DataBaseCaller();
+            List<Categoria> LCategoria = new PageCreateController().DataBaseGetCategoriasCaller();
 			CBCategoria.ItemsSource = LCategoria;
 			CBCategoria.SelectedIndex = 0;
         }
@@ -131,7 +131,7 @@ namespace WhatToDo.View
 			var categoria = (Categoria)CBCategoria.SelectedItem;
 			DateTime date = PickerDate.Date.Date.Add(PickerTime.Time);
 
-			PCC.DataBaseCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, date));
+			PCC.DataBaseInsertAtividadeCaller(new Atividade(TextNome.Text, categoria.IdCategoria, localGps, TextLocal.Text, TextDescricao.Text, date));
             Frame.Navigate(typeof(MainPage), User);
         }
     }

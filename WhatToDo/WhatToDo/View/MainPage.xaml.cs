@@ -21,6 +21,7 @@ using WhatToDo.View;
 using WhatToDo.Controller;
 using Windows.Devices.Input;
 using Windows.UI.Popups;
+using WhatToDo.Service.Auxiliar;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,13 +39,15 @@ namespace WhatToDo
 
         public MainPage()
         {
-            MainPageController MPC = new MainPageController();
+            GetLocation();
+
+            MainPageController mpc = new MainPageController();
 
             this.InitializeComponent();
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
 
-            Atividades = MPC.DataBaseCaller();
+            Atividades = mpc.DataBaseCaller();
             ShowEventos();
 
             MenuOpened = true;
@@ -64,21 +67,18 @@ namespace WhatToDo
 
         private void ShowEventos()
         {
-            string [] geoloc;
-            double latitude;
-            double longitude;
-
-            Bing.Maps.Location l;
-            Bing.Maps.Pushpin pushpin;
-
             foreach (var atividade in Atividades)
             {
-                geoloc = atividade.LocalGPS.Split(' ');
-                latitude = double.Parse(geoloc[0]);
-                longitude = double.Parse(geoloc[1]);
-                l = new Bing.Maps.Location(latitude, longitude);
-                //MyMap.TryPixelToLocation(e.GetCurrentPoint(this.MyMap).Position, out l);
-                pushpin = new Bing.Maps.Pushpin();
+                GetLocation();
+                if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
+                {
+                    continue;
+                }
+                var geoloc = atividade.LocalGPS.Split(' ');
+                var latitude = double.Parse(geoloc[0]);
+                var longitude = double.Parse(geoloc[1]);
+                var l = new Location(latitude, longitude);
+                var pushpin = new Pushpin();
                 pushpin.SetValue(Bing.Maps.MapLayer.PositionProperty, l);
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
@@ -132,7 +132,7 @@ namespace WhatToDo
             MenuOpened = !MenuOpened;
         }
 
-        async private void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
+        private async void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
         {
             Pushpin pushpin = sender as Pushpin;
             Location local = pushpin.GetValue(MapLayer.PositionProperty) as Location;

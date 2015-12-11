@@ -48,10 +48,10 @@ namespace WhatToDo.View
             {
                 Frame.Navigate(typeof(MainPage), new Usuario("admin"));
             }
-            else if (PEC.DataBaseCaller(new Usuario(email, senha)) == 0)
+            else if (PEC.DataBaseValidateRegisterCaller(new Usuario(email, senha)) == 0)
             {
                 /* este usuario deve vir com nome */
-                Frame.Navigate(typeof(MainPage), PEC.DataBaseCaller(email));
+                Frame.Navigate(typeof(MainPage), PEC.DataBaseGetUsuarioCaller(email));
             }
             else
             {

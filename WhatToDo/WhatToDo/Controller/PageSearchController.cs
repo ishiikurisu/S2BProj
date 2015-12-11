@@ -10,9 +10,13 @@ namespace WhatToDo.Controller
 {
     class PageSearchController
     {
-        public List<Atividade> DataBaseCaller()
+        public List<Atividade> DataBaseGetAtividadesCaller()
         {
             return DatabaseConnection.GetAtividades();
+        }
+        public List<Categoria> DataBaseGetCategoriasCaller()
+        {
+            return DatabaseConnection.GetCategorias();
         }
     }
 }

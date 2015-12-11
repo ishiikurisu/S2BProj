@@ -47,6 +47,9 @@ namespace WhatToDo.View
             User = e.Parameter as Usuario;
         }
 
+        // Get current user location
+        // This method will update the location string variable 
+        // Format: "lat lon"
         private async Task GetLocation()
         {
             Geolocator locator = new Geolocator();
@@ -57,11 +60,11 @@ namespace WhatToDo.View
             location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
-        private void ShowEventos()
+        private async void ShowEventos()
         {
             foreach (var atividade in Atividades)
             {
-                GetLocation();
+                await GetLocation();
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;
@@ -121,12 +124,6 @@ namespace WhatToDo.View
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage), User);
-        }
-
-        private async void TextCategory_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //TODO
-            //Implement search paranmeters
         }
 
         private void TextName_LostFocus(object sender, RoutedEventArgs e)

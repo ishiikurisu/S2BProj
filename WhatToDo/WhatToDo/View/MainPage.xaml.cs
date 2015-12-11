@@ -22,6 +22,7 @@ using WhatToDo.Controller;
 using Windows.Devices.Input;
 using Windows.UI.Popups;
 using WhatToDo.Service.Auxiliar;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -40,10 +41,9 @@ namespace WhatToDo
         public MainPage()
         {
             GetLocation();
+			this.InitializeComponent();
 
-            MainPageController mpc = new MainPageController();
-
-            this.InitializeComponent();
+			MainPageController mpc = new MainPageController();
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
 
@@ -51,25 +51,29 @@ namespace WhatToDo
             ShowEventos();
 
             MenuOpened = true;
-        }
 
-        // Get current user location
-        // This method will update the location string variable 
-        // Format: "lat lon"
-        private async void GetLocation()
+			
+		}
+
+
+		// Get current user location
+		// This method will update the location string variable 
+		// Format: "lat lon"
+		private async Task GetLocation()
         {
             Geolocator locator = new Geolocator();
-            Geoposition pos = await locator.GetGeopositionAsync();
+			Geoposition pos = await locator.GetGeopositionAsync();
+
             var coord = pos.Coordinate.Point;
 
             location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
-        private void ShowEventos()
+        private async void ShowEventos()
         {
             foreach (var atividade in Atividades)
             {
-                GetLocation();
+                await GetLocation();
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;

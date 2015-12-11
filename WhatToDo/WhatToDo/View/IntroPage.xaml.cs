@@ -1,10 +1,12 @@
-﻿using WhatToDo.View;
+﻿using System;
+using WhatToDo.View;
 using WhatToDo.Service.Constants;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using WhatToDo.Service.Connection;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Auxiliar;
+using Windows.Devices.Geolocation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -17,10 +19,19 @@ namespace WhatToDo
     {
         public IntroPage()
         {
+			AskLocationPermission();
             this.InitializeComponent();
         }
 
-        private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)
+		private async void AskLocationPermission()
+		{
+			var uri = new Uri("ms-settings:privacy-location");
+			var accessStatus = await Geolocator.RequestAccessAsync();
+
+			return;
+		}
+
+		private void ButtonRegistrar_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(PaginaRegistrar));
         }

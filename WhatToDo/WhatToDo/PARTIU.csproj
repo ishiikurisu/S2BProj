@@ -99,6 +99,7 @@
     <Compile Include="Controller\MainPageController.cs" />
     <Compile Include="Controller\PageCreateController.cs" />
     <Compile Include="Controller\PageRegistrarController.cs" />
+    <Compile Include="Controller\PageSearchController.cs" />
     <Compile Include="Controller\PaginaEntrarController.cs" />
     <Compile Include="Model\Entity\Atividade.cs" />
     <Compile Include="Model\Entity\Categoria.cs" />

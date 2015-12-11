@@ -55,7 +55,6 @@ namespace WhatToDo
 			
 		}
 
-
 		// Get current user location
 		// This method will update the location string variable 
 		// Format: "lat lon"

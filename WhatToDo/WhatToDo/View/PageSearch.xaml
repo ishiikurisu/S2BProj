@@ -21,7 +21,7 @@
             </StackPanel>
             <StackPanel x:Name="PanelOptions">
                 <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
-                <TextBox x:Name="TextCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" />
+                <ComboBox x:Name="TextCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" />
                 <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
                 <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" LostFocus="TextName_LostFocus"></TextBox>
                 <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>

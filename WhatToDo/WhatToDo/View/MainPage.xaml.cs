@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage.Streams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -182,10 +183,16 @@ namespace WhatToDo
 
             if (file != null)
             {
-                //var bitmap = new BitmapImage();
-                //Stream stream = await file.OpenStreamForReadAsync();
-                //bitmap.SetSource(stream);
-                //ImageUser.Source = bitmap;
+                //ImageUser.Source = new BitmapImage(new Uri(file.Path, UriKind.Absolute));
+                //ImageUser.Source = RandomAccessStreamReference.CreateFromUri(new Uri(file.Path));
+                using (IRandomAccessStream fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                {
+                    // Set the image source to the selected bitmap
+                    BitmapImage bitmapImage = new BitmapImage();
+
+                    await bitmapImage.SetSourceAsync(fileStream);
+                    ImageUser.Source = bitmapImage;
+                }
             }
 
         }

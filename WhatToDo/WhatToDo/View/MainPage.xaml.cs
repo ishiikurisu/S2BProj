@@ -23,6 +23,9 @@ using Windows.Devices.Input;
 using Windows.UI.Popups;
 using WhatToDo.Service.Auxiliar;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -168,8 +171,23 @@ namespace WhatToDo
             
         }
 
-        private void ImageUser_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private async void ImageUser_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            FileOpenPicker flop = new FileOpenPicker();
+            flop.ViewMode = PickerViewMode.Thumbnail;
+            flop.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            flop.FileTypeFilter.Add(".jpg");
+            flop.FileTypeFilter.Add(".png");
+            StorageFile file = await flop.PickSingleFileAsync();
+
+            if (file != null)
+            {
+                //var bitmap = new BitmapImage();
+                //Stream stream = await file.OpenStreamForReadAsync();
+                //bitmap.SetSource(stream);
+                //ImageUser.Source = bitmap;
+            }
+
         }
     }
 }

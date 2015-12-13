@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Auxiliar;
 using WhatToDo.Service.Constants;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace WhatToDo.Service.Connection
 {
@@ -123,11 +124,22 @@ namespace WhatToDo.Service.Connection
 				{
 					Usuario usuario = new Usuario(email);
 
+					usuario.IdUsuario = reader.GetInt16("id");
 					usuario.Nome = reader.GetString("nome");
 					usuario.Senha = "";
 					usuario.Perfil = reader.GetString("perfil");
 
 					reader.Close();
+
+					sql = "SELECT foto FROM TB_foto WHERE id_usuario = @id_usuario";
+					cmd = new MySqlCommand(sql, connection);
+					cmd.Parameters.AddWithValue("@id_usuario", usuario.IdUsuario);
+					reader = cmd.ExecuteReader();
+
+					if(reader.Read())
+					{
+						//usuario.Foto = reader.GetBytes(;
+					}
 
 					return usuario;
 				}
@@ -157,6 +169,24 @@ namespace WhatToDo.Service.Connection
 			}
 
 		}
+
+		public static int InsertUserPhoto(Usuario user)
+		{
+			using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
+			{
+				connection.Open();
+
+				var sql = "INSERT INTO TB_Fotos(id_usuario, foto) VALUES (@id_usuario, @foto)";
+
+				var cmd = new MySqlCommand(sql, connection);
+				cmd.Parameters.AddWithValue("@id_usuario", user.IdUsuario);
+				cmd.Parameters.AddWithValue("@foto", user.Foto);
+
+				cmd.ExecuteNonQuery();
+
+				return 1;
+			}
+        }
 
         // Search for all activities
         // Return a IEnumerable containing these activities

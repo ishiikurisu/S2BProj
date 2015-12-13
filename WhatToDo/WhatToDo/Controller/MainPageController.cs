@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Connection;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace WhatToDo.Controller
 {
@@ -14,5 +15,10 @@ namespace WhatToDo.Controller
         {
             return DatabaseConnection.GetAtividades();
         }
+
+		public void DataBaseInsertUsuarioFotoCaller(Usuario user)
+		{
+			DatabaseConnection.InsertUserPhoto(user);
+		}
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace WhatToDo.Model.Entity
 {
@@ -15,7 +16,8 @@ namespace WhatToDo.Model.Entity
         public string Senha { get; set; }
         public string Nome { get; set; }
         public string Perfil { get; set; }
-        public Usuario(string nome, string senha, string email, string perfil)
+		public BitmapImage Foto { get; set; }
+		public Usuario(string nome, string senha, string email, string perfil)
         {
             this.Nome = nome;
             this.Senha = senha;

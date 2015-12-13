@@ -29,8 +29,6 @@ namespace WhatToDo.View
         private List<Categoria> LCategorias; 
         public PageSearch()
         {
-            GetLocation();
-
             PageSearchController psc = new PageSearchController();
 
             this.InitializeComponent();
@@ -65,13 +63,14 @@ namespace WhatToDo.View
 
         private async void ShowEventos()
         {
-            foreach (var atividade in Atividades)
+			await GetLocation();
+			foreach (var atividade in Atividades)
             {
-                await GetLocation();
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;
                 }
+
                 var geoloc = atividade.LocalGPS.Split(' ');
                 var latitude = double.Parse(geoloc[0]);
                 var longitude = double.Parse(geoloc[1]);

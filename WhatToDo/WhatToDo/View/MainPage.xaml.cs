@@ -44,7 +44,6 @@ namespace WhatToDo
 
         public MainPage()
         {
-            GetLocation();
 			this.InitializeComponent();
 
 			MainPageController mpc = new MainPageController();
@@ -55,8 +54,6 @@ namespace WhatToDo
             ShowEventos();
 
             MenuOpened = true;
-
-			
 		}
 
 		// Get current user location
@@ -74,9 +71,10 @@ namespace WhatToDo
 
         private async void ShowEventos()
         {
-            foreach (var atividade in Atividades)
+			await GetLocation();
+
+			foreach (var atividade in Atividades)
             {
-                await GetLocation();
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;
@@ -187,7 +185,11 @@ namespace WhatToDo
                     BitmapImage bitmapImage = new BitmapImage();
                     await bitmapImage.SetSourceAsync(fileStream);
                     ImageUser.Source = bitmapImage;
-                }
+					User.Foto = bitmapImage;
+
+					MainPageController mpc = new MainPageController();
+					mpc.DataBaseInsertUsuarioFotoCaller(User);
+				}
             }
 
         }

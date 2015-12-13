@@ -48,7 +48,7 @@
 
         <Grid Grid.Column="1">
 
-            <Maps:Map x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Maps:Map x:Name="MyMap" Credentials="yZXiwermLqTBJt2VnSCt~YxTMXZ7fui6edTDl40x-vQ~AlbY6CAlf5idncpBZu946QLl_a14YpZpNy4tqTdVwdbWUI02GY0iTQhJ1ECmd6DP" ShowTraffic="True" ShowScaleBar="False" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Grid>
     </Grid>

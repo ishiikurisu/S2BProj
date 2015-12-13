@@ -97,7 +97,7 @@ namespace WhatToDo.View
 
                 if (latitude == local.Latitude && longitude == local.Longitude)
                 {
-                    var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
+                    var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao + "\n" + atividade.Data);
                     await msg.ShowAsync();
                     break;
                 }
@@ -165,6 +165,20 @@ namespace WhatToDo.View
         {
             //TODO
             //Implement search paranmeters
+            foreach (var atividade in Atividades)
+            {
+                if ((FromData.Date.DateTime.CompareTo(atividade.Data) < 1) && (ToData.Date.DateTime.CompareTo(atividade.Data) > -1))
+                {
+                    var ps = from p in MyMap.Children
+                             where ((string)((Pushpin)p).Tag) == atividade.Nome
+                             select p;
+                    var psa = ps.ToArray();
+                    for (int i = 0; i < psa.Count(); i++)
+                    {
+                        MyMap.Children.Remove(psa[i]);
+                    }
+                }
+            }
         }
 
         private void SliderRaio_PointerReleased(object sender, PointerRoutedEventArgs e)

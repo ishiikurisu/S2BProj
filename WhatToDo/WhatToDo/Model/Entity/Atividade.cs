@@ -25,5 +25,7 @@ namespace WhatToDo.Model.Entity
 			this.Descricao = descricao;
             this.Data = data;
         }
+
+
     }
 }

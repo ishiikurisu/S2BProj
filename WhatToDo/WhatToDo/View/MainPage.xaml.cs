@@ -97,7 +97,7 @@ namespace WhatToDo
             {
                 LabelUser.Text = User.Nome;
             }
-            catch (Exception any)
+            catch (Exception)
             {
                 LabelUser.Text = User.Email;
             }
@@ -158,17 +158,17 @@ namespace WhatToDo
             }
         }
 
-        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            MainPageController MPC = new MainPageController();
-            MyMap.Children.Clear();
-            Atividades = MPC.DataBaseGetAtividadeCaller();
-            GetLocation();
-            ShowEventos();
-            
-        }
+		private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+		{
+			MainPageController MPC = new MainPageController();
+			MyMap.Children.Clear();
+			Atividades = MPC.DataBaseGetAtividadeCaller();
+			await GetLocation();
+			ShowEventos();
 
-        private async void ImageUser_PointerPressed(object sender, PointerRoutedEventArgs e)
+		}
+
+		private async void ImageUser_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             FileOpenPicker flop = new FileOpenPicker();
             flop.ViewMode = PickerViewMode.Thumbnail;

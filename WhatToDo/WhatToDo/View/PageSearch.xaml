@@ -21,21 +21,29 @@
             </StackPanel>
             <StackPanel x:Name="PanelOptions">
                 <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
-                <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" LostFocus="CBCategory_LostFocus" />
+                <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="ShowHidePushpins" />
                 <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
-                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" LostFocus="TextName_LostFocus"></TextBox>
+                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" TextChanged="ShowHidePushpins"></TextBox>
                 <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>
+
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="De" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <DatePicker x:Name="FromData" MinWidth="120" Margin="10" VerticalAlignment="Center" LostFocus="FromData_LostFocus"></DatePicker>
+                    <CheckBox x:Name="checkbFromDate" Margin="19,0,0,0" Checked="ShowHidePushpins" Unchecked="ShowHidePushpins" />
                 </StackPanel>
+                <DatePicker x:Name="FromData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event" />
+
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Até" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <DatePicker x:Name="ToData" MinWidth="120" Margin="10" VerticalAlignment="Center" LostFocus="ToData_LostFocus"></DatePicker>
+                    <CheckBox x:Name="checkbToDate" Margin="15,0,0,0" Checked="ShowHidePushpins" Unchecked="ShowHidePushpins"/>
                 </StackPanel>
+
+                <DatePicker x:Name="ToData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event"/>
+
                 <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
-                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" LostFocus="SliderRaio_LostFocus" />
+                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHidePushpins"/>
+                <TextBlock x:Name="txtSliderValue" TextWrapping="Wrap" Text="{Binding Value, ElementName=SliderRaio}" Margin="20,-25,0,0"/>
             </StackPanel>
+            
         </StackPanel>
 
         <Grid Grid.Column="1">

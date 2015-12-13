@@ -188,7 +188,7 @@ namespace WhatToDo.Service.Connection
         }
 
         // Search for all activities
-        // Return a IEnumerable containing these activities
+        // Return a List containing these activities
         public static List<Atividade> GetAtividades()
         {
             using (var connection = new MySqlConnection(DataBaseConstants.MyConnectionString))
@@ -208,6 +208,7 @@ namespace WhatToDo.Service.Connection
                 {
                     Atividade newAtividade = new Atividade();
                     newAtividade.Nome = reader.GetString("nome");
+					newAtividade.IdAtividade = reader.GetInt16("id");
                     newAtividade.IdCategoria = reader.GetInt16("id_categoria");
                     newAtividade.LocalGPS = reader.GetString("localGPS");
                     newAtividade.Local = reader.GetString("local");

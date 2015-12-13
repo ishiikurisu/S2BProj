@@ -1,14 +1,12 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WhatToDo.Model.Entity;
 using Windows.UI.Popups;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Bing.Maps;
@@ -79,6 +77,7 @@ namespace WhatToDo.View
                 var l = new Location(latitude, longitude);
                 var pushpin = new Pushpin();
                 pushpin.SetValue(MapLayer.PositionProperty, l);
+                pushpin.Tag = atividade.Nome;
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
             }
@@ -134,7 +133,25 @@ namespace WhatToDo.View
         {
             //TODO
             //Implement search paranmeters
-            
+            if (TextName.Text.Trim().Equals(""))
+            {
+                return;
+            }
+            string nomecheck = TextName.Text;
+            foreach (var atividade in Atividades)
+            {
+                if (!atividade.Nome.ToUpper().Contains(nomecheck.ToUpper()))
+                {
+                    var ps = from p in MyMap.Children
+                             where ((string)((Pushpin)p).Tag) == atividade.Nome
+                             select p;
+                    var psa = ps.ToArray();
+                    for (int i = 0; i < psa.Count(); i++)
+                    {
+                        MyMap.Children.Remove(psa[i]);
+                    }
+                }
+            }
         }
 
         private void FromData_LostFocus(object sender, RoutedEventArgs e)
@@ -155,7 +172,7 @@ namespace WhatToDo.View
             //Implement search paranmeters
         }
 
-        private async void CBCategory_LostFocus(object sender, RoutedEventArgs e)
+        private void CBCategory_LostFocus(object sender, RoutedEventArgs e)
         {
             //TODO
             //Implement search paranmeters
@@ -164,13 +181,14 @@ namespace WhatToDo.View
             {
                 if (atividade.IdCategoria != categoriacheck.IdCategoria)
                 {
-                    var geoloc = atividade.LocalGPS.Split(' ');
-                    var latitude = double.Parse(geoloc[0]);
-                    var longitude = double.Parse(geoloc[1]);
-                    var l = new Location(latitude, longitude);
-                    var pushpin = new Pushpin();
-                    pushpin.SetValue(MapLayer.PositionProperty, l);
-                    MyMap.Children.Clear();
+                    var ps = from p in MyMap.Children
+                             where ((string)((Pushpin)p).Tag) == atividade.Nome
+                             select p;
+                    var psa = ps.ToArray();
+                    for (int i = 0; i < psa.Count(); i++)
+                    {
+                        MyMap.Children.Remove(psa[i]);
+                    }
                 }
             }
         }

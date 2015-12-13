@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Auxiliar;

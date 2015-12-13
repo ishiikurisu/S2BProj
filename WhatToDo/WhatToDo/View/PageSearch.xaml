@@ -34,7 +34,7 @@
                     <DatePicker x:Name="ToData" MinWidth="120" Margin="10" VerticalAlignment="Center" LostFocus="ToData_LostFocus"></DatePicker>
                 </StackPanel>
                 <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
-                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" PointerReleased="SliderRaio_PointerReleased" />
+                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" LostFocus="SliderRaio_LostFocus" />
             </StackPanel>
         </StackPanel>
 

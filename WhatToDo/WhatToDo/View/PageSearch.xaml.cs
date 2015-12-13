@@ -26,7 +26,7 @@ namespace WhatToDo.View
         private Usuario User { get; set; }
         private List<Atividade> Atividades;
         private string location;
-        private List<Categoria> LCategorias; 
+        private List<Categoria> LCategorias;
         public PageSearch()
         {
             PageSearchController psc = new PageSearchController();
@@ -166,7 +166,7 @@ namespace WhatToDo.View
             //Implement search paranmeters
             foreach (var atividade in Atividades)
             {
-                if ((FromData.Date.DateTime.CompareTo(atividade.Data) < 1) && (ToData.Date.DateTime.CompareTo(atividade.Data) > -1))
+                if (!(FromData.Date.DateTime.CompareTo(atividade.Data) < 1) && (ToData.Date.DateTime.CompareTo(atividade.Data) > -1))
                 {
                     var ps = from p in MyMap.Children
                              where ((string)((Pushpin)p).Tag) == atividade.Nome
@@ -179,13 +179,6 @@ namespace WhatToDo.View
                 }
             }
         }
-
-        private void SliderRaio_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            //TODO
-            //Implement search paranmeters
-        }
-
         private void CBCategory_LostFocus(object sender, RoutedEventArgs e)
         {
             //TODO
@@ -194,6 +187,26 @@ namespace WhatToDo.View
             foreach (var atividade in Atividades)
             {
                 if (atividade.IdCategoria != categoriacheck.IdCategoria)
+                {
+                    var ps = from p in MyMap.Children
+                             where ((string)((Pushpin)p).Tag) == atividade.Nome
+                             select p;
+                    var psa = ps.ToArray();
+                    for (int i = 0; i < psa.Count(); i++)
+                    {
+                        MyMap.Children.Remove(psa[i]);
+                    }
+                }
+            }
+        }
+        private async void SliderRaio_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //Implement search paranmeters
+            await GetLocation();
+            foreach (var atividade in Atividades)
+            {
+                if (Geo.checkDistance(location, atividade.LocalGPS) > SliderRaio.Value)
                 {
                     var ps = from p in MyMap.Children
                              where ((string)((Pushpin)p).Tag) == atividade.Nome

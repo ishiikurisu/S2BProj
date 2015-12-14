@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Shapes;
-using Bing.Maps;
 using WhatToDo.Model.Entity;
 using WhatToDo.View;
 using WhatToDo.Controller;
@@ -166,26 +165,6 @@ namespace WhatToDo
 
 			return;
 		}
-
-		private async void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
-        {
-            Pushpin pushpin = sender as Pushpin;
-            Location local = pushpin.GetValue(MapLayer.PositionProperty) as Location;
-
-            foreach (var atividade in Atividades)
-            {
-                string[] geoloc = atividade.LocalGPS.Split(' ');
-                double latitude = double.Parse(geoloc[0]);
-                double longitude = double.Parse(geoloc[1]);
-
-                if (latitude == local.Latitude && longitude == local.Longitude)
-                {
-                    var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
-                    await msg.ShowAsync();
-                    break;
-                }
-            }
-        }
 
 		private async void ButtonRefresh_Click(object sender, RoutedEventArgs e)
 		{

@@ -14,37 +14,39 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonReturn" Visibility="Visible" Content="Voltar" Margin="10" Click="ButtonReturn_Click"></Button>
-                <Button x:Name="ButtonCollapse" Content="&lt;&lt;&lt;" Background="Transparent" Margin="10" Click="ButtonCollapse_Click"></Button>
-            </StackPanel>
-            <StackPanel x:Name="PanelOptions">
-                <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
-                <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="ShowHideIcons" />
-                <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
-                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" TextChanged="ShowHideIcons"></TextBox>
-                <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>
-
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="De" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <CheckBox x:Name="checkbFromDate" Margin="19,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons" />
+                    <Button x:Name="ButtonReturn" Visibility="Visible" Content="Voltar" Margin="10" Click="ButtonReturn_Click"></Button>
+                    <Button x:Name="ButtonCollapse" Content="&lt;&lt;&lt;" Background="Transparent" Margin="10" Click="ButtonCollapse_Click"></Button>
                 </StackPanel>
-                <DatePicker x:Name="FromData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event" />
+                <StackPanel x:Name="PanelOptions">
+                    <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
+                    <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="ShowHideIcons" />
+                    <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
+                    <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" TextChanged="ShowHideIcons"></TextBox>
+                    <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Até" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <CheckBox x:Name="checkbToDate" Margin="15,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="De" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                        <CheckBox x:Name="checkbFromDate" Margin="19,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons" />
+                    </StackPanel>
+                    <DatePicker x:Name="FromData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event" />
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Até" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                        <CheckBox x:Name="checkbToDate" Margin="15,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons"/>
+                    </StackPanel>
+
+                    <DatePicker x:Name="ToData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event"/>
+
+                    <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
+                    <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHideIcons"/>
+                    <TextBlock x:Name="txtSliderValue" TextWrapping="Wrap" Text="{Binding Value, ElementName=SliderRaio}" Margin="20,-25,0,0"/>
                 </StackPanel>
-
-                <DatePicker x:Name="ToData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event"/>
-
-                <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
-                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHideIcons"/>
-                <TextBlock x:Name="txtSliderValue" TextWrapping="Wrap" Text="{Binding Value, ElementName=SliderRaio}" Margin="20,-25,0,0"/>
-            </StackPanel>
             
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
         <Grid Grid.Column="1">
             <maps:MapControl x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" MapElementClick="MyMap_MapElementClick" 

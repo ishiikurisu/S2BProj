@@ -177,9 +177,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Bing.Maps.Xaml, Version=1.313.0825.0">
-      <Name>Bing Maps for C#, C++, or Visual Basic</Name>
-    </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>

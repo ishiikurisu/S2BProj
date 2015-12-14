@@ -1,6 +1,5 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using WhatToDo.Model.Entity;
 using Windows.UI.Popups;
@@ -9,11 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Bing.Maps;
 using WhatToDo.Controller;
 using WhatToDo.Service.Auxiliar;
-using Windows.UI.Xaml.Media;
-using Windows.UI;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Foundation;
 
@@ -21,10 +17,10 @@ using Windows.Foundation;
 
 namespace WhatToDo.View
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class PageSearch : Page
+	/// <summary>
+	/// An empty page that can be used on its own or navigated to within a Frame.
+	/// </summary>
+	public sealed partial class PageSearch : Page
     {
         private bool MenuOpened { get; set; }
         private Usuario User { get; set; }

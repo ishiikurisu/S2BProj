@@ -79,14 +79,27 @@ namespace WhatToDo
                 {
                     continue;
                 }
+
+				MapIcon icon = new MapIcon();
+
                 var geoloc = atividade.LocalGPS.Split(' ');
                 var latitude = double.Parse(geoloc[0]);
                 var longitude = double.Parse(geoloc[1]);
+
+				icon.Location = new Geopoint(new BasicGeoposition()
+					{ Latitude = latitude, Longitude = longitude });
+
+				icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+				icon.Title = atividade.Nome;
+				MyMap.MapElements.Add(icon);
+
+				/*
                 var l = new Location(latitude, longitude);
                 var pushpin = new Pushpin();
                 pushpin.SetValue(MapLayer.PositionProperty, l);
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);
+				*/
             }
         }
 
@@ -138,7 +151,23 @@ namespace WhatToDo
             MenuOpened = !MenuOpened;
         }
 
-        private async void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
+
+		private async void MyMap_MapElementClick(MapControl sender, MapElementClickEventArgs args)
+		{
+			var icon = args.MapElements.OfType<MapIcon>().FirstOrDefault();
+			if (icon == null)
+				return;
+
+			var local = icon.Location;
+
+			var atividade = Atividades.First(i => i.Nome == icon.Title);
+			var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
+			await msg.ShowAsync();
+
+			return;
+		}
+
+		private async void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
         {
             Pushpin pushpin = sender as Pushpin;
             Location local = pushpin.GetValue(MapLayer.PositionProperty) as Location;
@@ -193,5 +222,7 @@ namespace WhatToDo
             }
 
         }
-    }
+
+
+	}
 }

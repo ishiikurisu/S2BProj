@@ -4,7 +4,7 @@
     xmlns:local="using:WhatToDo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Maps="using:Bing.Maps"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     x:Class="WhatToDo.MainPage"
     mc:Ignorable="d" FontSize="20">
 
@@ -23,7 +23,9 @@
             <Button x:Name="ButtonRefresh" Margin="10" HorizontalAlignment="Center" Content="Recarregar" FontSize="20" Click="ButtonRefresh_Click" />
         </StackPanel>
         <Grid x:Name="PanelMap" Grid.Column="1">
-            <Maps:Map x:Name="MyMap" Credentials="yZXiwermLqTBJt2VnSCt~YxTMXZ7fui6edTDl40x-vQ~AlbY6CAlf5idncpBZu946QLl_a14YpZpNy4tqTdVwdbWUI02GY0iTQhJ1ECmd6DP" ShowTraffic="True" ShowScaleBar="False" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <maps:MapControl x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" MapElementClick="MyMap_MapElementClick" 
+                MapServiceToken="6mRv6rqH6YGIhEfdkrtz~M8FpdVFUc_jRYgaPqh1PYA~AnRNTnA_WbP8IKAtQS70rc1Mo3qeOjsDe_TjGqjBWn_ITj1R5T1MzJUaTKjUDsT7"/>
+
 
         </Grid>
     </Grid>

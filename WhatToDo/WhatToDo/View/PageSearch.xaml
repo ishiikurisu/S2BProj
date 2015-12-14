@@ -39,7 +39,7 @@
 
                 <DatePicker x:Name="ToData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event"/>
 
-                <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
+                <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca (km)" ></TextBlock>
                 <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHidePushpins"/>
                 <TextBlock x:Name="txtSliderValue" TextWrapping="Wrap" Text="{Binding Value, ElementName=SliderRaio}" Margin="20,-25,0,0"/>
             </StackPanel>

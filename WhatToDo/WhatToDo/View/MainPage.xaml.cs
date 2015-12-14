@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
-using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Shapes;
 using Bing.Maps;
 using WhatToDo.Model.Entity;
 using WhatToDo.View;
 using WhatToDo.Controller;
-using Windows.Devices.Input;
 using Windows.UI.Popups;
 using WhatToDo.Service.Auxiliar;
 using System.Threading.Tasks;
+using Windows.Services.Maps;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -73,17 +65,27 @@ namespace WhatToDo
         {
 			await GetLocation();
 
-			foreach (var atividade in Atividades)
+            var geoloc = location.Split(' ');
+            var latitude = double.Parse(geoloc[0]);
+            var longitude = double.Parse(geoloc[1]);
+            var l = new Location(latitude, longitude);
+            var pushpin = new Pushpin();
+            pushpin.SetValue(MapLayer.PositionProperty, l);
+            pushpin.Tag = "user";
+            pushpin.Background = new SolidColorBrush(Colors.Red);
+            MyMap.Children.Add(pushpin);
+
+            foreach (var atividade in Atividades)
             {
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;
                 }
-                var geoloc = atividade.LocalGPS.Split(' ');
-                var latitude = double.Parse(geoloc[0]);
-                var longitude = double.Parse(geoloc[1]);
-                var l = new Location(latitude, longitude);
-                var pushpin = new Pushpin();
+                geoloc = atividade.LocalGPS.Split(' ');
+                latitude = double.Parse(geoloc[0]);
+                longitude = double.Parse(geoloc[1]);
+                l = new Location(latitude, longitude);
+                pushpin = new Pushpin();
                 pushpin.SetValue(MapLayer.PositionProperty, l);
                 pushpin.PointerPressed += Pushpin_PointerPressedOverride;
                 MyMap.Children.Add(pushpin);

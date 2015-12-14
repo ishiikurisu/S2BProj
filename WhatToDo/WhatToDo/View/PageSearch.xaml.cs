@@ -14,6 +14,8 @@ using WhatToDo.Controller;
 using WhatToDo.Service.Auxiliar;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.Foundation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -41,7 +43,7 @@ namespace WhatToDo.View
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             
-			CreateEventosPushpins();
+			CreateAtividadesIcons();
             MenuOpened = true;
         }
 
@@ -73,20 +75,9 @@ namespace WhatToDo.View
             location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
-        private async void CreateEventosPushpins()
+        private async void CreateAtividadesIcons()
         {
 			await GetLocation();
-
-			var pushpin = new Pushpin();
-			var geoloc = location.Split(' ');
-			var latitude = double.Parse(geoloc[0]);
-			var longitude = double.Parse(geoloc[1]);
-			var l = new Location(latitude, longitude);
-
-			pushpin.SetValue(MapLayer.PositionProperty, l);
-			pushpin.Tag = "user";
-			pushpin.Background = new SolidColorBrush(Colors.Red);
-			MyMap.Children.Add(pushpin);
 
 			foreach (var atividade in Atividades)
             {
@@ -95,39 +86,40 @@ namespace WhatToDo.View
                     continue;
                 }
 
-                geoloc = atividade.LocalGPS.Split(' ');
-                latitude = double.Parse(geoloc[0]);
-                longitude = double.Parse(geoloc[1]);
-                l = new Location(latitude, longitude);
-                pushpin = new Pushpin();
-                pushpin.SetValue(MapLayer.PositionProperty, l);
-                pushpin.Tag = atividade.IdAtividade;
-                pushpin.PointerPressed += Pushpin_PointerPressedOverride;
-                MyMap.Children.Add(pushpin);
+				var icon = new MapIcon();
+
+				var geoloc = atividade.LocalGPS.Split(' ');
+				var latitude = double.Parse(geoloc[0]);
+				var longitude = double.Parse(geoloc[1]);
+
+				icon.Location = new Geopoint(new BasicGeoposition()
+				{ Latitude = latitude, Longitude = longitude });
+
+				icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+				icon.Title = atividade.Nome;
+				MyMap.MapElements.Add(icon);
             }
-
-
 		}
 
-		public void ShowHidePushpins(object sender, RoutedEventArgs e)
+		public void ShowHideIcons(object sender, RoutedEventArgs e)
 		{
 			if (MyMap == null)
 				return;
 
 			var atividadesCopy = new List<Atividade>(Atividades);
 
-			foreach (var pushpin in MyMap.Children.OfType<Pushpin>().Skip(1))
+			foreach(var icon in MyMap.MapElements.OfType<MapIcon>())
 			{
-				var atividade = atividadesCopy.Find(obj => obj.IdAtividade == (int)pushpin.Tag);
-				pushpin.Visibility = Visibility.Visible;
+				var atividade = atividadesCopy.Find(obj => obj.Nome == icon.Title);
+				icon.Visible = true;
 
 				//-------------------
 				// Filter by category
 				//-------------------
-				if(CBCategory.SelectedIndex > 0 &&
+				if (CBCategory.SelectedIndex > 0 &&
 					atividade.IdCategoria != ((Categoria)CBCategory.SelectedItem).IdCategoria)
 				{
-					pushpin.Visibility = Visibility.Collapsed;
+					icon.Visible = false;
 					atividadesCopy.Remove(atividade);
 				}
 
@@ -135,9 +127,9 @@ namespace WhatToDo.View
 				// Filter by activity name
 				//-------------------
 				if (!String.IsNullOrWhiteSpace(TextName.Text) &&
-					! atividade.Nome.ToUpper().Contains(TextName.Text.ToUpper()))
-                {
-					pushpin.Visibility = Visibility.Collapsed;
+					!atividade.Nome.ToUpper().Contains(TextName.Text.ToUpper()))
+				{
+					icon.Visible = false;
 					atividadesCopy.Remove(atividade);
 				}
 
@@ -146,9 +138,9 @@ namespace WhatToDo.View
 				// Filter by start date
 				//-------------------
 				if (checkbFromDate.IsChecked == true &&
-                    (atividade.Data < FromData.Date.DateTime))					
+					(atividade.Data < FromData.Date.DateTime))
 				{
-					pushpin.Visibility = Visibility.Collapsed;
+					icon.Visible = false;
 					atividadesCopy.Remove(atividade);
 				}
 
@@ -158,43 +150,36 @@ namespace WhatToDo.View
 				if (checkbToDate.IsChecked == true &&
 					(atividade.Data > FromData.Date.DateTime))
 				{
-					pushpin.Visibility = Visibility.Collapsed;
+					icon.Visible = false;
 					atividadesCopy.Remove(atividade);
 				}
 
 				//-------------------
 				// Filter by radius
 				//-------------------
-				if(! Geo.checkInsideRadius(location, atividade.LocalGPS, SliderRaio.Value))
-                {
-					pushpin.Visibility = Visibility.Collapsed;
+				if (!Geo.checkInsideRadius(location, atividade.LocalGPS, SliderRaio.Value))
+				{
+					icon.Visible = false;
 					atividadesCopy.Remove(atividade);
 				}
 
-
 			}
-
 		}
 
-        private async void Pushpin_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
-        {
-            Pushpin pushpin = sender as Pushpin;
-            Location local = pushpin.GetValue(MapLayer.PositionProperty) as Location;
+		private async void MyMap_MapElementClick(MapControl sender, MapElementClickEventArgs args)
+		{
+			var icon = args.MapElements.OfType<MapIcon>().FirstOrDefault();
+			if (icon == null)
+				return;
 
-            foreach (var atividade in Atividades)
-            {
-                string[] geoloc = atividade.LocalGPS.Split(' ');
-                double latitude = double.Parse(geoloc[0]);
-                double longitude = double.Parse(geoloc[1]);
+			var local = icon.Location;
 
-                if (latitude == local.Latitude && longitude == local.Longitude)
-                {
-                    var msg = new MessageDialog("Nome: " + atividade.Nome + "\n(" + atividade.IdCategoria + ")\n" + atividade.Descricao + "\n" + atividade.Data);
-                    await msg.ShowAsync();
-                    break;
-                }
-            }
-        }
+			var atividade = Atividades.First(i => i.Nome == icon.Title);
+			var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
+			await msg.ShowAsync();
+
+			return;
+		}
 
         private void ButtonCollapse_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -224,7 +209,7 @@ namespace WhatToDo.View
 
 		private void DateChanged_Event(object sender, DatePickerValueChangedEventArgs e)
 		{
-			ShowHidePushpins(null, null);
+			ShowHideIcons(null, null);
 		}
 
 	}

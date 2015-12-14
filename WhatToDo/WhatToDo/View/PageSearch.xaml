@@ -4,7 +4,7 @@
     xmlns:local="using:WhatToDo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Maps="using:Bing.Maps"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     x:Class="WhatToDo.View.PageSearch"
     mc:Ignorable="d" FontSize="20">
 
@@ -21,35 +21,34 @@
             </StackPanel>
             <StackPanel x:Name="PanelOptions">
                 <TextBlock x:Name="LabelCategory" FontSize="20" Text="Categoria" Margin="10" HorizontalAlignment="Left"></TextBlock>
-                <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="ShowHidePushpins" />
+                <ComboBox x:Name="CBCategory" FontSize="20" Margin="10" HorizontalAlignment="Stretch" SelectionChanged="ShowHideIcons" />
                 <TextBlock x:Name="LabelName" FontSize="20" HorizontalAlignment="Left" Margin="10" Text="Nome"></TextBlock>
-                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" TextChanged="ShowHidePushpins"></TextBox>
+                <TextBox x:Name="TextName" FontSize="20" HorizontalAlignment="Stretch" Margin="10" TextChanged="ShowHideIcons"></TextBox>
                 <TextBlock x:Name="LabelDate" FontSize="20" HorizontalAlignment="Left" Margin="10"></TextBlock>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="De" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <CheckBox x:Name="checkbFromDate" Margin="19,0,0,0" Checked="ShowHidePushpins" Unchecked="ShowHidePushpins" />
+                    <CheckBox x:Name="checkbFromDate" Margin="19,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons" />
                 </StackPanel>
                 <DatePicker x:Name="FromData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event" />
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Até" FontSize="20" VerticalAlignment="Center"></TextBlock>
-                    <CheckBox x:Name="checkbToDate" Margin="15,0,0,0" Checked="ShowHidePushpins" Unchecked="ShowHidePushpins"/>
+                    <CheckBox x:Name="checkbToDate" Margin="15,0,0,0" Checked="ShowHideIcons" Unchecked="ShowHideIcons"/>
                 </StackPanel>
 
                 <DatePicker x:Name="ToData" MinWidth="170" Margin="10" VerticalAlignment="Center" DateChanged="DateChanged_Event"/>
 
                 <TextBlock x:Name="LabelRaio" Margin="10" HorizontalAlignment="Left" Text="Raio de busca" ></TextBlock>
-                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHidePushpins"/>
+                <Slider x:Name="SliderRaio" Orientation="Horizontal" Margin="10" Maximum="200" Minimum="0" Value="42" ValueChanged="ShowHideIcons"/>
                 <TextBlock x:Name="txtSliderValue" TextWrapping="Wrap" Text="{Binding Value, ElementName=SliderRaio}" Margin="20,-25,0,0"/>
             </StackPanel>
             
         </StackPanel>
 
         <Grid Grid.Column="1">
-
-            <Maps:Map x:Name="MyMap" Credentials="yZXiwermLqTBJt2VnSCt~YxTMXZ7fui6edTDl40x-vQ~AlbY6CAlf5idncpBZu946QLl_a14YpZpNy4tqTdVwdbWUI02GY0iTQhJ1ECmd6DP" ShowTraffic="True" ShowScaleBar="False" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
+            <maps:MapControl x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" MapElementClick="MyMap_MapElementClick" 
+                MapServiceToken="6mRv6rqH6YGIhEfdkrtz~M8FpdVFUc_jRYgaPqh1PYA~AnRNTnA_WbP8IKAtQS70rc1Mo3qeOjsDe_TjGqjBWn_ITj1R5T1MzJUaTKjUDsT7"/>
         </Grid>
     </Grid>
 </Page>

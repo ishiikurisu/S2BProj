@@ -52,7 +52,7 @@ namespace WhatToDo.View
             Geolocator locator = new Geolocator();
             Geoposition pos = await locator.GetGeopositionAsync();
 
-            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location.png"));
+            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location_pin.png"));
             icon.Location = new Geopoint(new BasicGeoposition()
             { Latitude = latitude, Longitude = longitude });
             icon.NormalizedAnchorPoint = new Point(0.5, 1.0);

@@ -84,7 +84,7 @@ namespace WhatToDo.View
             Geolocator locator = new Geolocator();
             Geoposition pos = await locator.GetGeopositionAsync();
 
-            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location.png"));
+            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location_pin.png"));
             icon.Location = new Geopoint(new BasicGeoposition()
             { Latitude = latitude, Longitude = longitude });
             icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
@@ -123,7 +123,7 @@ namespace WhatToDo.View
 
 			var atividadesCopy = new List<Atividade>(Atividades);
 
-			foreach(var icon in MyMap.MapElements.OfType<MapIcon>())
+			foreach(var icon in MyMap.MapElements.OfType<MapIcon>().Skip(1))
 			{
 				var atividade = atividadesCopy.Find(obj => obj.Nome == icon.Title);
 				icon.Visible = true;
@@ -226,6 +226,5 @@ namespace WhatToDo.View
 		{
 			ShowHideIcons(null, null);
 		}
-
 	}
 }

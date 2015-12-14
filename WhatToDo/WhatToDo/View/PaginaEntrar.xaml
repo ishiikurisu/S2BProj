@@ -12,7 +12,7 @@
             <TextBlock FontSize="30" HorizontalAlignment="Center">Entrar</TextBlock>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="10" >E-mail</TextBlock>
-                <TextBox x:Name="TextEmail"  FontSize="20" Width="200" Margin="10"></TextBox>
+                <TextBox x:Name="TextEmail"  FontSize="20" Width="200" Margin="10" InputScope="EmailSmtpAddress"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="10" FontSize="20">Senha</TextBlock>

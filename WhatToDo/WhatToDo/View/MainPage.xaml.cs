@@ -72,12 +72,12 @@ namespace WhatToDo
             Geolocator locator = new Geolocator();
             Geoposition pos = await locator.GetGeopositionAsync();
 
-            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location.png"));
             icon.Location = new Geopoint(new BasicGeoposition()
             { Latitude = latitude, Longitude = longitude });
             icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
             icon.Title = "Você está aqui.";
-            MyMap.MapElements.Add(icon);
+			icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location_pin.png"));
+			MyMap.MapElements.Add(icon);
 
             await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
 
@@ -211,7 +211,5 @@ namespace WhatToDo
             }
 
         }
-
-
 	}
 }

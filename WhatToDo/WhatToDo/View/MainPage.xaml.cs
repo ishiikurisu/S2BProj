@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Shapes;
 using WhatToDo.Model.Entity;
 using WhatToDo.View;
 using WhatToDo.Controller;
-using Windows.Devices.Input;
 using Windows.UI.Popups;
 using WhatToDo.Service.Auxiliar;
 using System.Threading.Tasks;
@@ -72,25 +64,43 @@ namespace WhatToDo
         {
 			await GetLocation();
 
-			foreach (var atividade in Atividades)
+            var icon = new MapIcon();
+            var geoloc = location.Split(' ');
+            var latitude = double.Parse(geoloc[0]);
+            var longitude = double.Parse(geoloc[1]);
+
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+
+            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location.png"));
+            icon.Location = new Geopoint(new BasicGeoposition()
+            { Latitude = latitude, Longitude = longitude });
+            icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            icon.Title = "Você está aqui.";
+            MyMap.MapElements.Add(icon);
+
+            await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+
+            foreach (var atividade in Atividades)
             {
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
                 {
                     continue;
                 }
 
-				MapIcon icon = new MapIcon();
+				icon = new MapIcon();
 
-                var geoloc = atividade.LocalGPS.Split(' ');
-                var latitude = double.Parse(geoloc[0]);
-                var longitude = double.Parse(geoloc[1]);
+                geoloc = atividade.LocalGPS.Split(' ');
+                latitude = double.Parse(geoloc[0]);
+                longitude = double.Parse(geoloc[1]);
 
 				icon.Location = new Geopoint(new BasicGeoposition()
 					{ Latitude = latitude, Longitude = longitude });
 
 				icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
 				icon.Title = atividade.Nome;
-				MyMap.MapElements.Add(icon);
+                icon.Image = RandomAccessStreamReference.CreateFromUri(atividade.IdCategoria == 1 ? new Uri("ms-appx:///Assets/PinIcons/Esportes_pin.png") : new Uri("ms-appx:///Assets/PinIcons/Festas_pin.png"));
+                MyMap.MapElements.Add(icon);
 
 				/*
                 var l = new Location(latitude, longitude);
@@ -160,7 +170,7 @@ namespace WhatToDo
 			var local = icon.Location;
 
 			var atividade = Atividades.First(i => i.Nome == icon.Title);
-			var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
+			var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Local + "\n" + atividade.Descricao + "\n" + atividade.Data);
 			await msg.ShowAsync();
 
 			return;

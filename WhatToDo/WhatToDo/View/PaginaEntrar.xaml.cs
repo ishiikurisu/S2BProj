@@ -44,11 +44,11 @@ namespace WhatToDo.View
             string email = TextEmail.Text;
             string senha = PasswordSenha.Password;
 
-            if (email == "admin" && senha == "admin")
+            /*if (email == "admin" && senha == "admin")
             {
                 Frame.Navigate(typeof(MainPage), new Usuario("admin"));
             }
-            else if (PEC.DataBaseValidateRegisterCaller(new Usuario(email, senha)) == 0)
+            else */if (PEC.DataBaseValidateRegisterCaller(new Usuario(email, senha)) == 0)
             {
                 /* este usuario deve vir com nome */
                 Frame.Navigate(typeof(MainPage), PEC.DataBaseGetUsuarioCaller(email));
@@ -56,6 +56,8 @@ namespace WhatToDo.View
             else
             {
                 LabelErro.Visibility = Visibility.Visible;
+                TextEmail.Text = "";
+                PasswordSenha.Password = "";
             }
         }
     }

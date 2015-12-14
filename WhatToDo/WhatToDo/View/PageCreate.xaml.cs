@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using WhatToDo.Model.Entity;
 using Windows.Foundation;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -21,6 +24,7 @@ namespace WhatToDo.View
         private bool MenuOpened { get; set; }
         private bool MapMoved { get; set; }
 		private string localGps = "";
+	    private string location;
 		private MapIcon newIcon = new MapIcon();
 
         public PageCreate()
@@ -31,8 +35,42 @@ namespace WhatToDo.View
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.ActualWidth.ToString());
 
+            ShowLocation();
+
 			ButtonCreate.IsEnabled = false;
 		}
+
+	    private async void ShowLocation()
+	    {
+            await GetLocation();
+
+            var icon = new MapIcon();
+            var geoloc = location.Split(' ');
+            var latitude = double.Parse(geoloc[0]);
+            var longitude = double.Parse(geoloc[1]);
+
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+
+            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location.png"));
+            icon.Location = new Geopoint(new BasicGeoposition()
+            { Latitude = latitude, Longitude = longitude });
+            icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            icon.Title = "Você está aqui.";
+            MyMap.MapElements.Add(icon);
+
+            await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+        }
+
+        private async Task GetLocation()
+        {
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+
+            var coord = pos.Coordinate.Point;
+
+            location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

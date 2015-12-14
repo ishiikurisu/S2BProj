@@ -126,10 +126,14 @@ namespace WhatToDo.Service.Connection
 					usuario.IdUsuario = reader.GetInt16("id");
 					usuario.Nome = reader.GetString("nome");
 					usuario.Senha = "";
-					usuario.Perfil = reader.GetString("perfil");
+					if (!reader.IsDBNull(4))
+						usuario.Perfil = reader.GetString("perfil");
+					else
+						usuario.Perfil = "";
 
 					reader.Close();
 
+					/*
 					sql = "SELECT foto FROM TB_foto WHERE id_usuario = @id_usuario";
 					cmd = new MySqlCommand(sql, connection);
 					cmd.Parameters.AddWithValue("@id_usuario", usuario.IdUsuario);
@@ -139,7 +143,7 @@ namespace WhatToDo.Service.Connection
 					{
 						//usuario.Foto = reader.GetBytes(;
 					}
-
+					*/
 					return usuario;
 				}
 			}
@@ -175,7 +179,7 @@ namespace WhatToDo.Service.Connection
 			{
 				connection.Open();
 
-				var sql = "INSERT INTO TB_Fotos(id_usuario, foto) VALUES (@id_usuario, @foto)";
+				var sql = "INSERT INTO TB_Foto(id_usuario, foto) VALUES (@id_usuario, @foto)";
 
 				var cmd = new MySqlCommand(sql, connection);
 				cmd.Parameters.AddWithValue("@id_usuario", user.IdUsuario);

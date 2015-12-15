@@ -37,12 +37,12 @@ namespace WhatToDo.View
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.ActualWidth.ToString());
 
-            ShowLocation();
+            ShowUserCurrentLocation();
 
 			ButtonCreate.IsEnabled = false;
 		}
 
-	    private async void ShowLocation()
+	    private async void ShowUserCurrentLocation()
 	    {
             await GetLocation();
 
@@ -162,26 +162,10 @@ namespace WhatToDo.View
 			return;
 		}
 
-	    private async void ImageFocusLocation_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+	    private void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
 	    {
-            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
-            {
-                if (icon.Title.ToUpper().Equals("Você está aqui.".ToUpper()))
-                {
-                    var geoloc = location.Split(' ');
-                    var latitude = double.Parse(geoloc[0]);
-                    var longitude = double.Parse(geoloc[1]);
-
-                    Geolocator locator = new Geolocator();
-                    Geoposition pos = await locator.GetGeopositionAsync();
-                    icon.Location = new Geopoint(new BasicGeoposition()
-                    { Latitude = latitude, Longitude = longitude });
-                    icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-                    MyMap.MapElements.Add(icon);
-                    await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
-                    break;
-                }
-            }
+            MyMap.MapElements.Clear();
+            ShowUserCurrentLocation();
         }
     }
 }

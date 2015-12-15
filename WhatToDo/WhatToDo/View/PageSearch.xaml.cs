@@ -306,9 +306,11 @@ namespace WhatToDo.View
 			ShowHideIcons(null, null);
 		}
 
-	    private async void ImageFocusLocation_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+	    private void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
 	    {
-            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            MyMap.MapElements.Clear();
+            ShowIcons();
+            /*foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
             {
                 if (icon.Title.ToUpper().Equals("Você está aqui.".ToUpper()))
                 {
@@ -325,7 +327,7 @@ namespace WhatToDo.View
                     await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
                     break;
                 }
-            }
+            }*/
         }
     }
 }

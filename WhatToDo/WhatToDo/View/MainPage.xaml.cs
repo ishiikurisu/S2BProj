@@ -20,6 +20,7 @@ using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.UI;
+using MySql.Data.Types;
 using WhatToDo.Service.Constant;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -183,6 +184,8 @@ namespace WhatToDo
 			var icon = args.MapElements.OfType<MapIcon>().FirstOrDefault();
 			if (icon == null)
 				return;
+		    if (icon.Title == "Você está aqui.")
+		        return;
 
 			atividadeGeopoint = icon.Location;
 
@@ -281,7 +284,28 @@ namespace WhatToDo
 					mpc.DataBaseInsertUsuarioFotoCaller(User);
 				}
             }
-
         }
-	}
+
+        private async void ImageFocusLocation_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title.ToUpper().Equals("Você está aqui.".ToUpper()))
+                {
+                    var geoloc = location.Split(' ');
+                    var latitude = double.Parse(geoloc[0]);
+                    var longitude = double.Parse(geoloc[1]);
+
+                    Geolocator locator = new Geolocator();
+                    Geoposition pos = await locator.GetGeopositionAsync();
+                    icon.Location = new Geopoint(new BasicGeoposition()
+                    { Latitude = latitude, Longitude = longitude });
+                    icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                    MyMap.MapElements.Add(icon);
+                    await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+                    break;
+                }
+            }
+        }
+    }
 }

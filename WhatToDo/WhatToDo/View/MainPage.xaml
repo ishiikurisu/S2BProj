@@ -25,8 +25,9 @@
         <Grid x:Name="PanelMap" Grid.Column="1">
             <maps:MapControl x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" MapElementClick="MyMap_MapElementClick" TrafficFlowVisible="True"
                 MapServiceToken="6mRv6rqH6YGIhEfdkrtz~M8FpdVFUc_jRYgaPqh1PYA~AnRNTnA_WbP8IKAtQS70rc1Mo3qeOjsDe_TjGqjBWn_ITj1R5T1MzJUaTKjUDsT7"/>
-
-
+            <StackPanel x:Name="PanelMapButtons">
+                <Image x:Name="ImageFocusLocation" Source="../Assets/ButtonIcons/focus_location_btn.png" Stretch="Uniform" Height="32" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" PointerPressed="ImageFocusLocation_OnPointerPressed"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

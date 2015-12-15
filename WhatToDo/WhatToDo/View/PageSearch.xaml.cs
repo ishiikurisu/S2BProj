@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.Storage.Streams;
 using Windows.UI;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -304,5 +305,27 @@ namespace WhatToDo.View
 		{
 			ShowHideIcons(null, null);
 		}
-	}
+
+	    private async void ImageFocusLocation_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+	    {
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title.ToUpper().Equals("Você está aqui.".ToUpper()))
+                {
+                    var geoloc = location.Split(' ');
+                    var latitude = double.Parse(geoloc[0]);
+                    var longitude = double.Parse(geoloc[1]);
+
+                    Geolocator locator = new Geolocator();
+                    Geoposition pos = await locator.GetGeopositionAsync();
+                    icon.Location = new Geopoint(new BasicGeoposition()
+                    { Latitude = latitude, Longitude = longitude });
+                    icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                    MyMap.MapElements.Add(icon);
+                    await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+                    break;
+                }
+            }
+        }
+    }
 }

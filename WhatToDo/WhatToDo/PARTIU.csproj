@@ -138,6 +138,7 @@
     <None Include="WhatToDo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ButtonIcons\focus_location_btn.png" />
     <Content Include="Assets\PinIcons\current_location_pin.png" />
     <Content Include="Assets\PinIcons\Esportes_pin.png" />
     <Content Include="Assets\PinIcons\Festas_pin.png" />

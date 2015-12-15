@@ -12,7 +12,9 @@ using WhatToDo.Controller;
 using WhatToDo.Service.Auxiliar;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Foundation;
+using Windows.Services.Maps;
 using Windows.Storage.Streams;
+using Windows.UI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,6 +30,7 @@ namespace WhatToDo.View
         private List<Atividade> Atividades;
         private string location;
         private List<Categoria> LCategorias;
+	    private Geopoint atividadeGeopoint;
 
 
         public PageSearch()
@@ -40,7 +43,7 @@ namespace WhatToDo.View
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.Width.ToString());
             
-			CreateAtividadesIcons();
+			ShowIcons();
             MenuOpened = true;
         }
 
@@ -72,27 +75,17 @@ namespace WhatToDo.View
             location = coord.Position.Latitude.ToString() + " " + coord.Position.Longitude.ToString();
         }
 
-        private async void CreateAtividadesIcons()
+        private async void ShowIcons()
         {
-			await GetLocation();
+            await GetLocation();
 
-            var icon = new MapIcon();
-            var geoloc = location.Split(' ');
-            var latitude = double.Parse(geoloc[0]);
-            var longitude = double.Parse(geoloc[1]);
+            ShowUserLocation();
 
-            Geolocator locator = new Geolocator();
-            Geoposition pos = await locator.GetGeopositionAsync();
+            ShowAtividadesLocation();
+        }
 
-            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location_pin.png"));
-            icon.Location = new Geopoint(new BasicGeoposition()
-            { Latitude = latitude, Longitude = longitude });
-            icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            icon.Title = "Você está aqui.";
-            MyMap.MapElements.Add(icon);
-
-            await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
-
+        private void ShowAtividadesLocation()
+        {
             foreach (var atividade in Atividades)
             {
                 if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
@@ -100,23 +93,54 @@ namespace WhatToDo.View
                     continue;
                 }
 
-				icon = new MapIcon();
+                var icon = new MapIcon();
 
-				geoloc = atividade.LocalGPS.Split(' ');
-				latitude = double.Parse(geoloc[0]);
-				longitude = double.Parse(geoloc[1]);
+                var geoloc = atividade.LocalGPS.Split(' ');
+                var latitude = double.Parse(geoloc[0]);
+                var longitude = double.Parse(geoloc[1]);
 
-				icon.Location = new Geopoint(new BasicGeoposition()
-				{ Latitude = latitude, Longitude = longitude });
+                icon.Location = new Geopoint(new BasicGeoposition()
+                { Latitude = latitude, Longitude = longitude });
 
-				icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-				icon.Title = atividade.Nome;
-                icon.Image = RandomAccessStreamReference.CreateFromUri(atividade.IdCategoria == 1 ? new Uri("ms-appx:///Assets/PinIcons/Esportes_pin.png") : new Uri("ms-appx:///Assets/PinIcons/Festas_pin.png"));
+                icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                icon.Title = atividade.Nome;
+                icon.Image = RandomAccessStreamReference.CreateFromUri(SelectIconImage(atividade.IdCategoria));
                 MyMap.MapElements.Add(icon);
             }
-		}
+        }
 
-		public void ShowHideIcons(object sender, RoutedEventArgs e)
+        private async void ShowUserLocation()
+        {
+            var icon = new MapIcon();
+            var geoloc = location.Split(' ');
+            var latitude = double.Parse(geoloc[0]);
+            var longitude = double.Parse(geoloc[1]);
+
+            Geolocator locator = new Geolocator();
+            Geoposition pos = await locator.GetGeopositionAsync();
+            icon.Location = new Geopoint(new BasicGeoposition()
+            { Latitude = latitude, Longitude = longitude });
+            icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            icon.Title = "Você está aqui.";
+            icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/PinIcons/current_location_pin.png"));
+            MyMap.MapElements.Add(icon);
+            await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+        }
+
+	    private Uri SelectIconImage(int idCategoria)
+	    {
+	        switch (idCategoria)
+	        {
+                case 1:
+	                return new Uri("ms-appx:///Assets/PinIcons/Esportes_pin.png");
+                case 3:
+	                return new Uri("ms-appx:///Assets/PinIcons/Festas_pin.png");
+                default:
+	                return null;
+	        }
+	    }
+
+        public void ShowHideIcons(object sender, RoutedEventArgs e)
 		{
 			if (MyMap == null)
 				return;
@@ -181,20 +205,74 @@ namespace WhatToDo.View
 			}
 		}
 
-		private async void MyMap_MapElementClick(MapControl sender, MapElementClickEventArgs args)
+		private void MyMap_MapElementClick(MapControl sender, MapElementClickEventArgs args)
 		{
 			var icon = args.MapElements.OfType<MapIcon>().FirstOrDefault();
 			if (icon == null)
 				return;
 
-			var local = icon.Location;
+			atividadeGeopoint = icon.Location;
 
 			var atividade = Atividades.First(i => i.Nome == icon.Title);
-			var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Descricao);
-			await msg.ShowAsync();
+            ShowAtividadeOptions(atividade);
+        }
 
-			return;
-		}
+	    private async void ShowAtividadeOptions(Atividade atividade)
+	    {
+            var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Local + "\n" + atividade.Descricao + "\n" + atividade.Data);
+            msg.Commands.Add(new UICommand(
+                "Criar rota",
+                new UICommandInvokedHandler(this.CommandInvokedHandlerCriarRota)));
+            msg.Commands.Add(new UICommand(
+                "Cancelar"));
+            msg.DefaultCommandIndex = 0;
+            msg.CancelCommandIndex = 1;
+            await msg.ShowAsync();
+        }
+
+        private async void CommandInvokedHandlerCriarRota(IUICommand command)
+        {
+            GetLocation();
+
+            var geoloc = location.Split(' ');
+            // Start at Microsoft in Redmond, Washington.
+            BasicGeoposition startLocation = new BasicGeoposition();
+            startLocation.Latitude = double.Parse(geoloc[0]);
+            startLocation.Longitude = double.Parse(geoloc[1]);
+            Geopoint startPoint = new Geopoint(startLocation);
+
+            // End at the city of Seattle, Washington.
+            BasicGeoposition endLocation = new BasicGeoposition();
+            endLocation.Latitude = atividadeGeopoint.Position.Latitude;
+            endLocation.Longitude = atividadeGeopoint.Position.Longitude;
+            Geopoint endPoint = new Geopoint(endLocation);
+
+            // Get the route between the points.
+            MapRouteFinderResult routeResult =
+                await MapRouteFinder.GetDrivingRouteAsync(
+                startPoint,
+                endPoint,
+                MapRouteOptimization.Time,
+                MapRouteRestrictions.None);
+            if (routeResult.Status == MapRouteFinderStatus.Success)
+            {
+                MyMap.Routes.Clear();
+                // Use the route to initialize a MapRouteView.
+                MapRouteView viewOfRoute = new MapRouteView(routeResult.Route);
+                viewOfRoute.RouteColor = Colors.DodgerBlue;
+                viewOfRoute.OutlineColor = Colors.DodgerBlue;
+
+                // Add the new MapRouteView to the Routes collection
+                // of the MapControl.
+                MyMap.Routes.Add(viewOfRoute);
+
+                // Fit the MapControl to the route.
+                await MyMap.TrySetViewBoundsAsync(
+                    routeResult.Route.BoundingBox,
+                    null,
+                    Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+            }
+        }
 
         private void ButtonCollapse_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

@@ -108,6 +108,7 @@
     <Compile Include="Service\Auxiliar\Geo.cs" />
     <Compile Include="Service\Connection\DatabaseConnection.cs" />
     <Compile Include="Service\Constant\DataBaseConstants.cs" />
+    <Compile Include="Service\Constant\Icons.cs" />
     <Compile Include="View\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>

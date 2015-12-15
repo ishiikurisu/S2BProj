@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using WhatToDo.Model.Entity;
@@ -10,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using WhatToDo.Controller;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -159,5 +161,27 @@ namespace WhatToDo.View
 		{
 			return;
 		}
-	}
+
+	    private async void ImageFocusLocation_OnPointerPressed(object sender, PointerRoutedEventArgs e)
+	    {
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title.ToUpper().Equals("Você está aqui.".ToUpper()))
+                {
+                    var geoloc = location.Split(' ');
+                    var latitude = double.Parse(geoloc[0]);
+                    var longitude = double.Parse(geoloc[1]);
+
+                    Geolocator locator = new Geolocator();
+                    Geoposition pos = await locator.GetGeopositionAsync();
+                    icon.Location = new Geopoint(new BasicGeoposition()
+                    { Latitude = latitude, Longitude = longitude });
+                    icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                    MyMap.MapElements.Add(icon);
+                    await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -221,7 +221,7 @@ namespace WhatToDo.View
 	    {
             var msg = new MessageDialog(atividade.Nome + "\n" + atividade.Local + "\n" + atividade.Descricao + "\n" + atividade.Data);
             msg.Commands.Add(new UICommand(
-                "Criar rota",
+                "Mostrar rota",
                 new UICommandInvokedHandler(this.CommandInvokedHandlerCriarRota)));
             msg.Commands.Add(new UICommand(
                 "Cancelar"));

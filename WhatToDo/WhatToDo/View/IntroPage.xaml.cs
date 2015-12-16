@@ -7,6 +7,7 @@ using WhatToDo.Service.Connection;
 using WhatToDo.Model.Entity;
 using WhatToDo.Service.Auxiliar;
 using Windows.Devices.Geolocation;
+using WhatToDo.Controller;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,9 +22,10 @@ namespace WhatToDo
         {
 			AskLocationPermission();
             this.InitializeComponent();
+
         }
 
-		private async void AskLocationPermission()
+        private async void AskLocationPermission()
 		{
 			var uri = new Uri("ms-settings:privacy-location");
 			var accessStatus = await Geolocator.RequestAccessAsync();
@@ -38,7 +40,12 @@ namespace WhatToDo
 
         private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PaginaEntrar));
+            //Frame.Navigate(typeof(PaginaEntrar));
+
+            //************************* NÃO ESQUECER DE TIRAR! *************************
+            PaginaEntrarController PEC = new PaginaEntrarController();
+            Frame.Navigate(typeof(MainPage), PEC.DataBaseGetUsuarioCaller("admin"));
+            //************************* NÃO ESQUECER DE TIRAR! *************************
         }
     }
 }

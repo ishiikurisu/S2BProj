@@ -69,16 +69,16 @@ namespace WhatToDo
         {
 			await GetLocation();
 
+            MyMap.MapElements.Clear();
             ShowUserLocation();
-
-            ShowAtividadesLocation();
+            ShowAtividadesIcons();
         }
 
-        private void ShowAtividadesLocation()
+        private void ShowAtividadesIcons()
         {
             foreach (var atividade in Atividades)
             {
-                if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
+                if (!Geo.checkInsideRadius(location, atividade.LocalGPS, MapDistances.DefaultRadio))
                 {
                     continue;
                 }
@@ -286,10 +286,31 @@ namespace WhatToDo
             }
         }
 
-        private void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
+        private async void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
         {
-            MyMap.MapElements.Clear();
-            ShowIcons();
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title == "Você está aqui.")
+                {
+                    MyMap.MapElements.Remove(icon);
+                    break;
+                }
+            }
+            await GetLocation();
+            ShowUserLocation();
+        }
+
+        private async void RefreshAllEvents(object sender, RoutedEventArgs e)
+        {
+            var iconRemove = MyMap.MapElements.OfType<MapIcon>().Where(icon => icon.Title != "Você está aqui.").ToList();
+            foreach (var elem in iconRemove)
+            {
+                MyMap.MapElements.Remove(elem);
+            }
+            MainPageController mpc = new MainPageController();
+            Atividades = mpc.DataBaseGetAtividadeCaller();
+            await GetLocation();
+            ShowAtividadesIcons();
         }
     }
 }

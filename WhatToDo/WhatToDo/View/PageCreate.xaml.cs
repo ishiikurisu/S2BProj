@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using WhatToDo.Controller;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
+using WhatToDo.Service.Constant;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,12 +38,12 @@ namespace WhatToDo.View
             MyMap.Height = Window.Current.Bounds.Height;
             MyMap.Width = Window.Current.Bounds.Width - int.Parse(ColumnMenu.ActualWidth.ToString());
 
-            ShowUserCurrentLocation();
+            ShowUserLocation();
 
 			ButtonCreate.IsEnabled = false;
 		}
 
-	    private async void ShowUserCurrentLocation()
+	    private async void ShowUserLocation()
 	    {
             await GetLocation();
 
@@ -146,26 +147,49 @@ namespace WhatToDo.View
 		private void MyMap_MapTapped(MapControl sender, MapInputEventArgs args)
 		{
 			var location = args.Location;
+            var categoria = (Categoria)CBCategoria.SelectedItem;
 
-			newIcon.Location = location;
+            newIcon.Location = location;
 			newIcon.NormalizedAnchorPoint = new Point(0.5, 1.0);
 
 			localGps = location.Position.Latitude.ToString() + " " + location.Position.Longitude.ToString();
-			MyMap.MapElements.Remove(newIcon);
+            newIcon.Image = RandomAccessStreamReference.CreateFromUri(SelectIconImage(categoria.IdCategoria));
+            MyMap.MapElements.Remove(newIcon);
 			MyMap.MapElements.Add(newIcon);
 
 			ButtonCreate.IsEnabled = true;
 		}
 
-		private void MyMap_MapDoubleTapped(MapControl sender, MapInputEventArgs args)
+        private Uri SelectIconImage(int idCategoria)
+        {
+            switch (idCategoria)
+            {
+                case 1:
+                    return Icons.Esportes;
+                case 3:
+                    return Icons.Festas;
+                default:
+                    return null;
+            }
+        }
+
+        private void MyMap_MapDoubleTapped(MapControl sender, MapInputEventArgs args)
 		{
 			return;
 		}
 
-	    private void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
-	    {
-            MyMap.MapElements.Clear();
-            ShowUserCurrentLocation();
+        private async void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
+        {
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title == "Você está aqui.")
+                {
+                    MyMap.MapElements.Remove(icon);
+                    break;
+                }
+            }
+            await GetLocation();
+            ShowUserLocation();
         }
     }
 }

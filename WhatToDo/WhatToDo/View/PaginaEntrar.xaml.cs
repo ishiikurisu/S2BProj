@@ -18,6 +18,7 @@ namespace WhatToDo.View
         public PaginaEntrar()
         {
             this.InitializeComponent();
+
         }
 
         private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
@@ -48,7 +49,8 @@ namespace WhatToDo.View
             {
                 Frame.Navigate(typeof(MainPage), new Usuario("admin"));
             }
-            else */if (PEC.DataBaseValidateRegisterCaller(new Usuario(email, senha)) == 0)
+            else */
+            if (PEC.DataBaseValidateRegisterCaller(new Usuario(email, senha)) == 0)
             {
                 /* este usuario deve vir com nome */
                 Frame.Navigate(typeof(MainPage), PEC.DataBaseGetUsuarioCaller(email));

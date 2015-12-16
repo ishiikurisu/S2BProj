@@ -15,16 +15,16 @@ using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.Storage.Streams;
 using Windows.UI;
-using Windows.UI.Xaml.Input;
+using WhatToDo.Service.Constant;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace WhatToDo.View
 {
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
-	public sealed partial class PageSearch : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class PageSearch : Page
     {
         private bool MenuOpened { get; set; }
         private Usuario User { get; set; }
@@ -82,14 +82,14 @@ namespace WhatToDo.View
 
             ShowUserLocation();
 
-            ShowAtividadesLocation();
+            ShowAtividadesIcons();
         }
 
-        private void ShowAtividadesLocation()
+        private void ShowAtividadesIcons()
         {
             foreach (var atividade in Atividades)
             {
-                if (!Geo.checkInsideRadius(location, atividade.LocalGPS, 200))
+                if (!Geo.checkInsideRadius(location, atividade.LocalGPS, MapDistances.DefaultRadio))
                 {
                     continue;
                 }
@@ -133,9 +133,9 @@ namespace WhatToDo.View
 	        switch (idCategoria)
 	        {
                 case 1:
-	                return new Uri("ms-appx:///Assets/PinIcons/Esportes_pin.png");
+	                return Icons.Esportes;
                 case 3:
-	                return new Uri("ms-appx:///Assets/PinIcons/Festas_pin.png");
+	                return Icons.Festas;
                 default:
 	                return null;
 	        }
@@ -153,55 +153,62 @@ namespace WhatToDo.View
 				var atividade = atividadesCopy.Find(obj => obj.Nome == icon.Title);
 				icon.Visible = true;
 
-				//-------------------
-				// Filter by category
-				//-------------------
-				if (CBCategory.SelectedIndex > 0 &&
-					atividade.IdCategoria != ((Categoria)CBCategory.SelectedItem).IdCategoria)
-				{
-					icon.Visible = false;
-					atividadesCopy.Remove(atividade);
-				}
+			    try
+			    {
+                    //-------------------
+                    // Filter by category
+                    //-------------------
+                    if (CBCategory.SelectedIndex > 0 &&
+                        atividade.IdCategoria != ((Categoria)CBCategory.SelectedItem).IdCategoria)
+                    {
+                        icon.Visible = false;
+                        atividadesCopy.Remove(atividade);
+                    }
 
-				//-------------------
-				// Filter by activity name
-				//-------------------
-				if (!String.IsNullOrWhiteSpace(TextName.Text) &&
-					!atividade.Nome.ToUpper().Contains(TextName.Text.ToUpper()))
-				{
-					icon.Visible = false;
-					atividadesCopy.Remove(atividade);
-				}
+                    //-------------------
+                    // Filter by activity name
+                    //-------------------
+                    if (!String.IsNullOrWhiteSpace(TextName.Text) &&
+                        !atividade.Nome.ToUpper().Contains(TextName.Text.ToUpper()))
+                    {
+                        icon.Visible = false;
+                        atividadesCopy.Remove(atividade);
+                    }
 
 
-				//-------------------
-				// Filter by start date
-				//-------------------
-				if (checkbFromDate.IsChecked == true &&
-					(atividade.Data < FromData.Date.DateTime))
-				{
-					icon.Visible = false;
-					atividadesCopy.Remove(atividade);
-				}
+                    //-------------------
+                    // Filter by start date
+                    //-------------------
+                    if (checkbFromDate.IsChecked == true &&
+                        (atividade.Data < FromData.Date.DateTime))
+                    {
+                        icon.Visible = false;
+                        atividadesCopy.Remove(atividade);
+                    }
 
-				//-------------------
-				// Filter by end date
-				//-------------------
-				if (checkbToDate.IsChecked == true &&
-					(atividade.Data > FromData.Date.DateTime))
-				{
-					icon.Visible = false;
-					atividadesCopy.Remove(atividade);
-				}
+                    //-------------------
+                    // Filter by end date
+                    //-------------------
+                    if (checkbToDate.IsChecked == true &&
+                        (atividade.Data > FromData.Date.DateTime))
+                    {
+                        icon.Visible = false;
+                        atividadesCopy.Remove(atividade);
+                    }
 
-				//-------------------
-				// Filter by radius
-				//-------------------
-				if (!Geo.checkInsideRadius(location, atividade.LocalGPS, SliderRaio.Value))
-				{
-					icon.Visible = false;
-					atividadesCopy.Remove(atividade);
-				}
+                    //-------------------
+                    // Filter by radius
+                    //-------------------
+                    if (!Geo.checkInsideRadius(location, atividade.LocalGPS, SliderRaio.Value))
+                    {
+                        icon.Visible = false;
+                        atividadesCopy.Remove(atividade);
+                    }
+                }
+			    catch (Exception exception)
+			    {
+			        
+			    }
 
 			}
 		}
@@ -306,10 +313,31 @@ namespace WhatToDo.View
 			ShowHideIcons(null, null);
 		}
 
-	    private void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
-	    {
-            MyMap.MapElements.Clear();
-            ShowIcons();
+        private async void FocousOnCurrentLocation(object sender, RoutedEventArgs e)
+        {
+            foreach (var icon in MyMap.MapElements.OfType<MapIcon>())
+            {
+                if (icon.Title == "Você está aqui.")
+                {
+                    MyMap.MapElements.Remove(icon);
+                    break;
+                }
+            }
+            await GetLocation();
+            ShowUserLocation();
+        }
+
+        private async void RefreshAllEvents(object sender, RoutedEventArgs e)
+        {
+            var iconRemove = MyMap.MapElements.OfType<MapIcon>().Where(icon => icon.Title != "Você está aqui.").ToList();
+            foreach (var elem in iconRemove)
+            {
+                MyMap.MapElements.Remove(elem);
+            }
+            MainPageController mpc = new MainPageController();
+            Atividades = mpc.DataBaseGetAtividadeCaller();
+            await GetLocation();
+            ShowAtividadesIcons();
         }
     }
 }

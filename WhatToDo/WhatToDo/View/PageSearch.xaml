@@ -53,7 +53,10 @@
                 MapServiceToken="6mRv6rqH6YGIhEfdkrtz~M8FpdVFUc_jRYgaPqh1PYA~AnRNTnA_WbP8IKAtQS70rc1Mo3qeOjsDe_TjGqjBWn_ITj1R5T1MzJUaTKjUDsT7"/>
             <StackPanel x:Name="PanelMapButtons">
                 <Button x:Name="ButtonFocusLocation" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="FocousOnCurrentLocation" Background="#CCFFFFFF">
-                    <Image x:Name="ImageFocusLocation" Source="../Assets/ButtonIcons/focus_location_btn.png" Stretch="Uniform" Height="24" Width="24"/>
+                    <Image x:Name="ImageFocusLocation" Source="../Assets/ButtonIcons/focus_location_button.png" Stretch="Uniform" Height="24" Width="24"/>
+                </Button>
+                <Button x:Name="ButtonRefreshEvents" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Click="RefreshAllEvents" Background="#CCFFFFFF">
+                    <Image x:Name="ImageRefreshEvents" Source="../Assets/ButtonIcons/refresh_events_button.png" Stretch="Uniform" Height="24" Width="24"/>
                 </Button>
             </StackPanel>
         </Grid>

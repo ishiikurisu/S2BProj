@@ -189,7 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MySql.Data.RT">
-      <HintPath>C:\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\RT\MySql.Data.RT.dll</HintPath>
+      <HintPath>H:\Development Kits\MySQL\MySQL Connector Net 6.9.8\Assemblies\RT\MySql.Data.RT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />

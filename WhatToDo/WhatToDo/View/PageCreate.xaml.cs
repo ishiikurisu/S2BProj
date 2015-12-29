@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using WhatToDo.Controller;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
+using WhatToDo.Service.Auxiliar;
 using WhatToDo.Service.Constant;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -153,25 +154,12 @@ namespace WhatToDo.View
 			newIcon.NormalizedAnchorPoint = new Point(0.5, 1.0);
 
 			localGps = location.Position.Latitude.ToString() + " " + location.Position.Longitude.ToString();
-            newIcon.Image = RandomAccessStreamReference.CreateFromUri(SelectIconImage(categoria.IdCategoria));
+            newIcon.Image = RandomAccessStreamReference.CreateFromUri(Images.SelectPinImage(categoria.IdCategoria));
             MyMap.MapElements.Remove(newIcon);
 			MyMap.MapElements.Add(newIcon);
 
 			ButtonCreate.IsEnabled = true;
 		}
-
-        private Uri SelectIconImage(int idCategoria)
-        {
-            switch (idCategoria)
-            {
-                case 1:
-                    return Icons.Esportes;
-                case 3:
-                    return Icons.Festas;
-                default:
-                    return null;
-            }
-        }
 
         private void MyMap_MapDoubleTapped(MapControl sender, MapInputEventArgs args)
 		{

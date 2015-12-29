@@ -106,6 +106,7 @@
     <Compile Include="Model\Entity\Interesse.cs" />
     <Compile Include="Model\Entity\UsuarioAtividade.cs" />
     <Compile Include="Service\Auxiliar\Geo.cs" />
+    <Compile Include="Service\Auxiliar\Images.cs" />
     <Compile Include="Service\Connection\DatabaseConnection.cs" />
     <Compile Include="Service\Constant\DataBaseConstants.cs" />
     <Compile Include="Service\Constant\Icons.cs" />
@@ -141,9 +142,20 @@
   <ItemGroup>
     <Content Include="Assets\ButtonIcons\focus_location_button.png" />
     <Content Include="Assets\ButtonIcons\refresh_events_button.png" />
+    <Content Include="Assets\PinIcons\comercio_pin.png" />
+    <Content Include="Assets\PinIcons\culinaria_pin.png" />
+    <Content Include="Assets\PinIcons\cultura_pin.png" />
     <Content Include="Assets\PinIcons\current_location_pin.png" />
-    <Content Include="Assets\PinIcons\Esportes_pin.png" />
-    <Content Include="Assets\PinIcons\Festas_pin.png" />
+    <Content Include="Assets\PinIcons\curso_pin.png" />
+    <Content Include="Assets\PinIcons\esporte_pin.png" />
+    <Content Include="Assets\PinIcons\festa_pin.png" />
+    <Content Include="Assets\PinIcons\geocaching_pin.png" />
+    <Content Include="Assets\PinIcons\lazer_pin.png" />
+    <Content Include="Assets\PinIcons\manifestacao_pin.png" />
+    <Content Include="Assets\PinIcons\outros_pin.png" />
+    <Content Include="Assets\PinIcons\religiao_pin.png" />
+    <Content Include="Assets\PinIcons\show_pin.png" />
+    <Content Include="Assets\PinIcons\social_pin.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

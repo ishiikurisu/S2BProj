@@ -105,7 +105,7 @@ namespace WhatToDo.View
 
                 icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
                 icon.Title = atividade.Nome;
-                icon.Image = RandomAccessStreamReference.CreateFromUri(SelectIconImage(atividade.IdCategoria));
+                icon.Image = RandomAccessStreamReference.CreateFromUri(Images.SelectPinImage(atividade.IdCategoria));
                 MyMap.MapElements.Add(icon);
             }
         }
@@ -127,19 +127,6 @@ namespace WhatToDo.View
             MyMap.MapElements.Add(icon);
             await MyMap.TrySetViewAsync(pos.Coordinate.Point, 15);
         }
-
-	    private Uri SelectIconImage(int idCategoria)
-	    {
-	        switch (idCategoria)
-	        {
-                case 1:
-	                return Icons.Esportes;
-                case 3:
-	                return Icons.Festas;
-                default:
-	                return null;
-	        }
-	    }
 
         public void ShowHideIcons(object sender, RoutedEventArgs e)
 		{

@@ -147,7 +147,6 @@ namespace WhatToDo
                 LabelUser.Visibility = Visibility.Collapsed;
                 ButtonCreate.Visibility = Visibility.Collapsed;
                 ButtonSearch.Visibility = Visibility.Collapsed;
-                ButtonRefresh.Visibility = Visibility.Collapsed;
                 ImageExpand.Text = ">";
                 ColumnMenu.Width = new GridLength(60);
             }
@@ -156,7 +155,6 @@ namespace WhatToDo
                 LabelUser.Visibility = Visibility.Visible;
                 ButtonCreate.Visibility = Visibility.Visible;
                 ButtonSearch.Visibility = Visibility.Visible;
-                ButtonRefresh.Visibility = Visibility.Visible;
                 ImageExpand.Text = "<<<";
                 ColumnMenu.Width = new GridLength(200);
             }

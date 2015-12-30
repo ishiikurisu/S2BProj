@@ -40,12 +40,13 @@ namespace WhatToDo
 
         private void ButtonEntrar_Click(object sender, RoutedEventArgs e)
         {
-            //Frame.Navigate(typeof(PaginaEntrar));
+            Frame.Navigate(typeof(PaginaEntrar));
 
-            //************************* NÃO ESQUECER DE TIRAR! *************************
+            /*//************************* NÃO ESQUECER DE TIRAR! *************************
             PaginaEntrarController PEC = new PaginaEntrarController();
             Frame.Navigate(typeof(MainPage), PEC.DataBaseGetUsuarioCaller("admin"));
             //************************* NÃO ESQUECER DE TIRAR! *************************
+            */
         }
     }
 }

@@ -17,7 +17,7 @@ namespace WhatToDo.Service.Constant
         public static Uri Geocaching = new Uri("ms-appx:///Assets/PinIcons/geocaching_pin.png");
         public static Uri Lazer = new Uri("ms-appx:///Assets/PinIcons/lazer_pin.png");
         public static Uri Manifestacao = new Uri("ms-appx:///Assets/PinIcons/manifestacao_pin.png");
-        public static Uri Outros = new Uri("ms-appx:///Assets/PinIcons/Outros_pin.png");
+        public static Uri Outros = new Uri("ms-appx:///Assets/PinIcons/outros_pin.png");
         public static Uri Religiao = new Uri("ms-appx:///Assets/PinIcons/religiao_pin.png");
         public static Uri Show = new Uri("ms-appx:///Assets/PinIcons/show_pin.png");
         public static Uri Social = new Uri("ms-appx:///Assets/PinIcons/social_pin.png");

@@ -37,6 +37,8 @@ namespace WhatToDo.Service.Auxiliar
                     return Icons.Religiao;
                 case 13:
                     return Icons.Geocaching;
+                case 14:
+                    return Icons.Outros;
                 default:
                     return null;
             }

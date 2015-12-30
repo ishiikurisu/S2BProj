@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Popups;
@@ -23,29 +24,29 @@ namespace WhatToDo.View
         private async void ButtonFinalizar_Click(object sender, RoutedEventArgs e)
         {
             PageRegistrarController PRC = new PageRegistrarController();
-            //Usuario UsuarioCadastro = new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text);
-            if (PRC.DataBaseInsertUsuarioCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
+            if (!IsValidEmail(TextEmail.Text))
+            {
+                LabelErro.Text = "Erro! Email inválido!";
+                LabelErro.Visibility = Visibility.Visible;
+            }
+            else if (PRC.DataBaseInsertUsuarioCaller(new Usuario(TextNome.Text, PasswordSenha.Password, TextEmail.Text)) == 0)
             {
                 msg = new MessageDialog("Usuário cadastrado com sucesso!");
                 await msg.ShowAsync();
                 LabelErro.Visibility = Visibility.Collapsed;
+                Frame.Navigate(typeof(PaginaEntrar));
             }
             else
             {
+                LabelErro.Text = "Erro! Email já cadastrado!";
                 LabelErro.Visibility = Visibility.Visible;
             }
-            /* turn "Collapsed" to "Visible" */
-            //Old test for LabelErro.Visibility implementation.
-            //if (Banco.Add(new Usuario(nome, senha, email)))
-            //{
-            //    var msg = new MessageDialog(string.Format("{0} uses {1} as a password. What a faggot.", nome, senha));
-            //    await msg.ShowAsync();
-            //}
-            //else
-            //{
-            //    LabelErro.Visibility = Visibility.Visible;
-            //}
-            Frame.Navigate(typeof(MainPage), new Usuario(TextEmail.Text));
+        }
+
+        bool IsValidEmail(string email)
+        {
+            var addr = new EmailAddressAttribute();
+            return addr.IsValid(email);
         }
 
         private void ButtonCancelar_Click(object sender, RoutedEventArgs e)

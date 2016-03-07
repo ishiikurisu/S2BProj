@@ -11,7 +11,7 @@ namespace WhatToDo.Service.Constants
     public class DataBaseConstants
     {
         //Connection String
-        public static string MyConnectionString = @"server=179.214.27.171;
+        public static string MyConnectionString = @"server=177.235.9.74;
                                                   database=partiudb;
                                                   uid= user_partiuproj;
                                                   password=v8FJjw6BMeePtGpP;
